@@ -136,7 +136,7 @@ button:focus-visible{outline:3px dashed var(--blue);outline-offset:4px;border-ra
 @keyframes nope{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 
 /* ---------- Erwachsene ---------- */
-.overlay{position:fixed;inset:0;background:rgba(62,52,44,.4);display:flex;justify-content:center;align-items:flex-start;overflow:auto;z-index:20;
+.overlay{position:fixed;inset:0;background:rgba(62,52,44,.4);display:flex;justify-content:center;align-items:flex-start;overflow:auto;z-index:80;
   padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .panel{width:min(580px,100%);background:var(--sheet);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:16px;font-family:var(--read);font-size:14px}
 .panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -150,6 +150,7 @@ button:focus-visible{outline:3px dashed var(--blue);outline-offset:4px;border-ra
 .tile[aria-pressed="true"]{border-color:var(--ink);background:var(--pick);color:var(--ink);font-weight:700}
 .tile[aria-pressed="true"]::after{content:"";position:absolute;top:-9px;right:-9px;width:24px;height:24px;border-radius:50%;background:var(--go) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233e342c' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat;border:2px solid var(--ink)}
 details{border-top:1.5px dashed #d6cab8;padding-top:10px}
+.vnote{margin:8px 0 0;font-size:13px;color:var(--pencil);max-width:60ch}
 summary{cursor:pointer;font-weight:700;color:var(--pencil);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 details p{margin:8px 0 0;max-width:65ch;line-height:1.5}
 .ok{width:58px;height:58px;border-radius:50%;background:var(--go);border:3px solid var(--ink);display:grid;place-items:center;flex:none}
@@ -167,7 +168,7 @@ details p{margin:8px 0 0;max-width:65ch;line-height:1.5}
 .stubs svg{width:58px;height:29px}
 .prog{display:flex;gap:1px}.prog svg{width:20px;height:20px}
 @media (max-width:480px){.wallet{flex-direction:column;text-align:center}.wallet .trainart{width:80%}.stubs,.prog{justify-content:center}}
-.tix{display:flex;align-items:center;gap:3px;font-size:21px;font-weight:700;background:var(--sheet);border-radius:14px;padding:4px 8px;flex:none;box-shadow:0 2px 0 rgba(90,70,50,.2)}
+.tix{display:flex;align-items:center;gap:3px;font-size:21px;font-weight:700;background:var(--sheet);border-radius:12px 16px 11px 15px;padding:4px 8px;flex:none;box-shadow:0 2px 0 rgba(90,70,50,.2)}
 .tix svg{width:36px;height:20px}
 #ticketWin{align-items:center}
 .tkwin{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;max-width:520px}
@@ -270,62 +271,67 @@ canvas{display:block;position:absolute;inset:0}
 .pip{width:clamp(12px,2.6vmin,18px);height:clamp(12px,2.6vmin,18px);border-radius:50%;border:2.5px solid var(--ink);background:#fbf3e1;transition:background .2s}
 .pip.on{background:#f3c969}
 #hud{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:3}
-.pill{pointer-events:auto;background:rgba(251,243,225,.93);border:2.5px solid var(--ink);border-radius:999px;padding:3px 12px;font:inherit;font-weight:700;font-size:clamp(14px,3.4vmin,20px);color:var(--ink);box-shadow:0 3px 0 rgba(74,54,40,.25);cursor:pointer}
+.pill{pointer-events:auto;display:inline-flex;align-items:center;gap:5px;background:rgba(251,243,225,.95);border:2.5px solid var(--ink);border-radius:12px 16px 11px 15px;padding:3px 10px 3px 6px;font:inherit;font-weight:800;font-size:clamp(15px,3.4vmin,20px);color:var(--ink);box-shadow:0 3px 0 rgba(74,54,40,.25)}
+.pill svg{width:clamp(20px,4.4vmin,26px);height:clamp(20px,4.4vmin,26px)}
+.pill.tkpill svg{width:clamp(34px,7vmin,44px)}
+.rbtn{pointer-events:auto;width:clamp(44px,9vmin,54px);height:clamp(44px,9vmin,54px);border-radius:50%;border:2.5px solid var(--ink);background:rgba(251,243,225,.95);display:grid;place-items:center;padding:0;cursor:pointer;box-shadow:0 3px 0 rgba(74,54,40,.25);position:relative;overflow:hidden;isolation:isolate}
+.rbtn svg{width:60%;height:60%}
+.rbtn:active{transform:translateY(2px)}
 #stars{display:inline-block;transition:transform .2s}
 #stars.bump{transform:scale(1.35)}
 .hudR{display:flex;gap:6px}
-.tog[aria-pressed=false]{opacity:.45;text-decoration:line-through}
+
 #bubble{position:absolute;left:10px;top:clamp(44px,10vmin,60px);max-width:min(64%,500px);display:flex;align-items:flex-start;gap:6px;pointer-events:none;z-index:3;transition:opacity .35s,transform .35s}
 #bubble.hidden{opacity:0;transform:translateY(-8px)}
 #bubFace{width:clamp(44px,10vmin,70px);flex:none}
 #bubTxt{background:var(--paper);border:2.5px solid var(--ink);border-radius:4px 18px 18px 18px;padding:7px 13px;font-size:clamp(14px,3.6vmin,22px);font-weight:700;box-shadow:0 3px 0 rgba(74,54,40,.25);margin-top:8px}
 #choice{position:absolute;left:50%;top:clamp(48px,11vmin,66px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:4;transition:opacity .3s}
 #choice.hidden{opacity:0;pointer-events:none}
-#choice .t{background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;padding:3px 14px;font-weight:800;font-size:clamp(14px,3.4vmin,20px)}
+#choice .t{background:var(--paper);border:2.5px solid var(--ink);border-radius:14px 18px 12px 16px;padding:3px 14px;font-weight:800;font-size:clamp(14px,3.4vmin,20px)}
 #choice .row{display:flex;gap:clamp(14px,4vw,40px)}
 .chb{width:clamp(76px,19vmin,124px);height:clamp(76px,19vmin,124px);border-radius:50%;border:3px solid var(--ink);background:radial-gradient(circle at 35% 30%,#fffaf0,#f1e3c4);font:inherit;font-size:clamp(30px,8vmin,54px);line-height:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 5px 0 rgba(74,54,40,.3);animation:pulse 1.2s infinite;color:var(--ink);padding:0}
 .chb span{font-size:clamp(11px,2.6vmin,16px);font-weight:800;margin-top:4px}
-.overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(244,234,212,.86);z-index:10;text-align:center;padding:16px}
+.overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:safe center;overflow-y:auto;gap:10px;background:rgba(244,234,212,.86);z-index:10;text-align:center;padding:16px}
 .overlay.hidden{display:none}
 .overlay h1{font-size:clamp(28px,7.5vmin,58px);margin:0;color:#c95d4c;text-shadow:2px 2px 0 #fff,4px 4px 0 rgba(74,54,40,.15)}
 .overlay p{margin:0;font-size:clamp(14px,3.4vmin,19px);max-width:560px}
-.big{font:inherit;font-weight:800;font-size:clamp(17px,4vmin,25px);padding:10px 22px;border-radius:999px;border:3px solid var(--ink);color:var(--ink);box-shadow:0 5px 0 rgba(74,54,40,.35);cursor:pointer}
+.big{font:inherit;font-weight:800;font-size:clamp(16px,3.6vmin,22px);display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:clamp(124px,26vmin,170px);padding:8px 16px 10px;border-radius:18px 24px 16px 22px;border:3px solid var(--ink);color:var(--ink);box-shadow:0 5px 0 rgba(74,54,40,.35);cursor:pointer}
+.big svg{width:clamp(44px,9vmin,64px);height:clamp(30px,6vmin,42px)}
 .big:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(74,54,40,.35)}
 .b1{background:#a6d98d}.b2{background:#f8dc8a}
 .rowb{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-#startCat{width:clamp(90px,24vmin,150px);animation:bob 2.4s ease-in-out infinite}
+#startCat{width:clamp(70px,18vmin,130px);animation:bob 2.4s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-6px) rotate(-3deg)}}
 .small-link{font-size:13px;opacity:.75;text-decoration:underline;cursor:pointer;background:none;border:0;font:inherit;color:inherit}
 .card{background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:16px 20px;max-width:560px;text-align:left;font-size:15px;line-height:1.45;max-height:80vh;overflow:auto}
 .card h2{margin:0 0 6px;font-size:20px}
 .tip{font-size:13px;opacity:.7}
 .hudL{display:flex;gap:6px}
-#tParent{position:relative;overflow:hidden;isolation:isolate}
-#tParent.holding::after,#startInfo.holding::after{content:"";position:absolute;inset:0;background:#f3c969;transform-origin:left;animation:fill 3s linear forwards;z-index:-1}
+.adult{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;font:inherit;font-size:14px;font-weight:700;color:var(--ink);opacity:.85;cursor:pointer;touch-action:none;user-select:none}
+.adult .rbtn{position:relative;overflow:hidden;isolation:isolate}
+#tParent.holding::after,#startInfo.holding .rbtn::after{content:"";position:absolute;inset:0;background:#f3c969;transform-origin:left;animation:fill 3s linear forwards;z-index:-1}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .trainPick{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .tp{background:#fbf3e1;border:3px solid var(--ink);border-radius:16px;padding:4px 8px 6px;font:inherit;font-weight:800;font-size:clamp(13px,3vmin,17px);color:var(--ink);display:flex;flex-direction:column;align-items:center;cursor:pointer;box-shadow:0 4px 0 rgba(74,54,40,.3);opacity:.75;transition:transform .15s}
 .tp canvas{position:static;width:clamp(96px,21vmin,150px);height:auto}
 .tp.sel{background:#fff2c2;opacity:1;transform:scale(1.06);box-shadow:0 4px 0 rgba(74,54,40,.3),0 0 0 4px #f3c969}
 .opt{margin:10px 0}
-.seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.seg button,.sw{font:inherit;font-weight:700;font-size:15px;border:2.5px solid var(--ink);border-radius:999px;padding:4px 12px;background:#fbf3e1;color:var(--ink);cursor:pointer}
-.seg button.sel,.sw.on{background:#a6d98d}
 .card hr{border:0;border-top:2px dashed rgba(74,54,40,.3);margin:12px 0}
-@media (max-height:520px){#start>p:not(.tip){display:none}#startCat{width:60px}#start h1{font-size:30px}#start{gap:8px}}
+@media (max-height:520px){#start>p:not(.tip):not(.tkline){display:none}#startCat{width:60px}#start h1{font-size:30px}#start{gap:8px}}
 
-.tkpill{display:inline-flex;align-items:center;gap:4px}
-.tkline{font-weight:800;font-size:clamp(15px,3.6vmin,21px)!important;background:#fff2c2;border:2.5px dashed var(--ink);border-radius:14px;padding:4px 14px}
+.tkline{display:flex;align-items:center;gap:8px;font-weight:800;font-size:clamp(15px,3.6vmin,21px)!important;background:#fff2c2;border:2.5px dashed var(--ink);border-radius:14px 18px 12px 16px;text-align:left;padding:4px 14px}
 .big[disabled]{opacity:.4;cursor:default}
 </style>
 <div id="app">
   <div id="stage">
     <canvas id="c"></canvas>
     <div id="hud">
-      <div class="hudL"><div class="pill" id="starPill" aria-live="polite">⭐ <span id="stars">0</span></div><div class="pill" id="routePill" title="Bahnhöfe">🚉 <span id="route">0/1</span></div></div>
+      <div class="hudL"><div class="pill" id="starPill" aria-live="polite" title="Sterne"><svg viewBox="-17 -17 34 34"><path d="M0 -15 L4.4 -5.2 L14.6 -4.6 L6.8 2.3 L9 12.5 L0 7 L-9 12.5 L-6.8 2.3 L-14.6 -4.6 L-4.4 -5.2Z" fill="#f3c94f" stroke="#8a6a1f" stroke-width="2.2" stroke-linejoin="round"/></svg><span id="stars">0</span></div><div class="pill" id="routePill" title="Bahnhöfe"><svg viewBox="0 0 24 24"><path d="M3 21V10l9-6 9 6v11z" fill="#f3c969" stroke="#4a3628" stroke-width="1.8" stroke-linejoin="round"/><rect x="9.5" y="14" width="5" height="7" fill="#c95d4c" stroke="#4a3628" stroke-width="1.4"/><circle cx="12" cy="10" r="2" fill="#fff" stroke="#4a3628" stroke-width="1.2"/></svg><span id="route">0/1</span></div></div>
       <div class="hudR">
-        <div class="pill tkpill" id="tkPill" title="Fahrkarten">🎫 <span id="tkNum">0</span></div><button class="pill" id="tHome" title="Zurück zum Zählrahmen" aria-label="Zurück zum Zählrahmen">🏠</button><button class="pill tog" id="tSound" aria-pressed="true" title="Ton an/aus">🔊</button>
-        <button class="pill" id="tParent" title="Elternmenü – lange gedrückt halten">⚙️</button>
+        <div class="pill tkpill" id="tkPill" title="Fahrkarten"><svg viewBox="0 0 72 36"><path d="M3 4h66v9a5 5 0 0 0 0 10v9H3v-9a5 5 0 0 0 0-10z" fill="#f6d36a" stroke="#4a3628" stroke-width="2.4" stroke-linejoin="round"/><path d="M50 6v24" stroke="#4a3628" stroke-width="1.8" stroke-dasharray="3 3"/><path d="M38 22h-26v-6l4-4h8v6h14z" fill="#cc5548" stroke="#4a3628" stroke-width="1.4" stroke-linejoin="round"/><circle cx="18" cy="25" r="3" fill="#4a3628"/><circle cx="32" cy="25" r="3" fill="#4a3628"/></svg><span id="tkNum">0</span></div>
+        <button class="rbtn" id="tHome" title="Zum Zählrahmen" aria-label="Zum Zählrahmen"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></button>
+        <button class="rbtn" id="tSound" aria-pressed="true" title="Töne an oder aus" aria-label="Töne an oder aus"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></button>
+        <button class="rbtn" id="tParent" title="Für Erwachsene – 3 Sekunden drücken" aria-label="Für Erwachsene, 3 Sekunden drücken"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg></button>
       </div>
     </div>
     <div id="bubble" class="hidden"><div id="bubFace"></div><div id="bubTxt"></div></div>
@@ -355,39 +361,21 @@ canvas{display:block;position:absolute;inset:0}
     <button class="tp" data-t="ice"><canvas width="264" height="108"></canvas>Schnellzug</button>
   </div>
   <div class="rowb">
-    <button class="big b1" id="startFree">🚂 Einfach fahren</button>
-    <button class="big b2" id="startTasks">⭐ Mit Aufgaben</button>
+    <button class="big b1" id="startFree"><svg viewBox="0 0 96 60"><g stroke="#4a3628" stroke-width="2.4" stroke-linejoin="round"><path d="M4 52h88" stroke-width="2.6"/><g transform="translate(92 0) scale(-1 1)"><rect x="10" y="26" width="40" height="20" rx="4" fill="#cc5548"/><rect x="44" y="12" width="26" height="34" rx="4" fill="#cc5548"/><rect x="49" y="17" width="16" height="11" rx="2" fill="#dcebf3"/><rect x="18" y="12" width="9" height="15" fill="#4a3628"/><circle cx="22" cy="49" r="5" fill="#4a3628"/><circle cx="40" cy="49" r="5" fill="#4a3628"/><circle cx="60" cy="48" r="6" fill="#4a3628"/></g></g></svg>Einfach fahren</button>
+    <button class="big b2" id="startTasks"><svg viewBox="-17 -17 34 34"><path d="M0 -15 L4.4 -5.2 L14.6 -4.6 L6.8 2.3 L9 12.5 L0 7 L-9 12.5 L-6.8 2.3 L-14.6 -4.6 L-4.4 -5.2Z" fill="#f3c94f" stroke="#4a3628" stroke-width="2" stroke-linejoin="round"/></svg>Mit Aufgaben</button>
   </div>
   <p class="tkline" id="ticketLine"></p>
   <p class="tip" id="rotTip">Tipp: Handy quer halten – dann ist die Bahn schön groß.</p>
-  <button class="big b2" id="startHome">🏠 Zurück zum Zählrahmen</button>
-  <button class="small-link" id="startInfo" style="position:relative;isolation:isolate;overflow:hidden;touch-action:none;font-size:16px;font-weight:700;opacity:.9;text-decoration:none;border:2.5px solid #4a3628;border-radius:999px;padding:8px 18px;background:#fbf3e1">⚙️ Elternmenü – 3 Sek. halten</button>
-</div>
-
-<div class="overlay hidden" id="parent">
-  <div class="card">
-    <h2>⚙️ Elternmenü</h2>
-    <div class="opt"><b>Streckenlänge</b> – danach kommt die Endstation
-      <div class="seg" id="segRoute"><button data-r="1">1 Bahnhof</button><button data-r="2">2 Bahnhöfe</button><button data-r="5">5 Bahnhöfe</button><button data-r="0">Freie Fahrt ∞</button></div></div>
-    <div class="opt"><b>Aufgaben</b> <button class="sw" id="pTasks"></button><br><span class="tip">Am Hupen-Schild hupen, am Bahnhof beim Stern halten, an der Weiche ein Ziel wählen.</span></div>
-    <div class="opt"><b>Vorlesen</b> <button class="sw" id="pSpeak"></button> &nbsp; <b>Ton</b> <button class="sw" id="pSound"></button></div>
-    <div class="rowb" style="margin-top:12px"><button class="big b2" id="pRestart">🔁 Neue Fahrt</button><button class="big b1" id="pClose">Weiter spielen</button></div>
-    <hr>
-    <p>Ein ruhiges Zugspiel für kleine Kinder. Gesteuert wird mit großen Knöpfen: <b>Los</b>, <b>Halt</b>, <b>langsam</b>, <b>schnell</b> und der <b>Hupe</b>. Der Knopf, der gerade gebraucht wird, leuchtet. Fehler werden nie bestraft. Überall gibt es Dinge zum Antippen.</p>
-    <p>Das Elternmenü öffnet sich nur, wenn man das Zahnrad ⚙️ etwa 3 Sekunden gedrückt hält. Auf dem Startbildschirm gilt das auch für den Knopf „Elternmenü“.</p>
-    <p><b>Datenschutz:</b> Keine Cookies, kein Tracking, keine Anmeldung, keine Inhalte von fremden Servern. Gespeichert werden nur Sterne und Fahrkarten, lokal im Browser. „Vorlesen“ ist standardmäßig aus; es nutzt die Sprachausgabe des Geräts bzw. Browsers – je nach Browser kann dabei der Text an den Anbieter der Stimme übertragen werden.</p>
-    <p>Kommas Zählrahmen &amp; Kommas Bimmelbahn von Sebastian Wolf, Lizenz CC BY-SA 4.0.<br>Impressum: Sebastian Wolf, Graf-Leopold-Ring 2, 94099 Ruhstorf a.d.Rott, s.w.oer@outlook.de</p>
-  </div>
+  <div class="rowb" style="align-items:center"><button class="big b2" id="startHome"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Zum Zählrahmen</button><button class="adult" id="startInfo" aria-label="Für Erwachsene, 3 Sekunden drücken"><span class="rbtn"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg></span>Für Erwachsene · 3 Sek. halten</button></div>
 </div>
 
 <div class="overlay hidden" id="endScr">
   <div id="endCat"></div>
-  <h1>🏁 Endstation!</h1>
+  <h1>Endstation!</h1>
   <p id="endTxt"></p>
   <div class="rowb">
-    <button class="big b1" id="endAgain">🔁 Nochmal fahren</button>
-    <button class="big b2" id="endOther">🚆 Anderen Zug wählen</button>
-    <button class="big b2" id="endHome">🏠 Zum Zählrahmen</button>
+    <button class="big b2" id="endOther"><svg viewBox="0 0 96 60"><g stroke="#4a3628" stroke-width="2.4" stroke-linejoin="round"><path d="M4 52h88" stroke-width="2.6"/><g transform="translate(92 0) scale(-1 1)"><rect x="10" y="26" width="40" height="20" rx="4" fill="#cc5548"/><rect x="44" y="12" width="26" height="34" rx="4" fill="#cc5548"/><rect x="49" y="17" width="16" height="11" rx="2" fill="#dcebf3"/><rect x="18" y="12" width="9" height="15" fill="#4a3628"/><circle cx="22" cy="49" r="5" fill="#4a3628"/><circle cx="40" cy="49" r="5" fill="#4a3628"/><circle cx="60" cy="48" r="6" fill="#4a3628"/></g></g></svg>Anderer Zug</button>
+    <button class="big b2" id="endHome"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Zum Zählrahmen</button>
   </div>
 </div>
 
@@ -397,21 +385,24 @@ canvas{display:block;position:absolute;inset:0}
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="gTitle">
     <div class="panel-head"><h2 id="gTitle">Für Erwachsene</h2>
       <button class="ok" id="grownClose" aria-label="Fertig"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3e342c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.5l4.5 4.5 8.5-10"/></svg></button></div>
-    <div><h3>Kugeln</h3><div class="tiles" data-key="principle"></div></div>
-    <div><h3>Größe</h3><div class="tiles" data-key="range"></div></div>
-    <div><h3>Anordnung</h3><div class="tiles" data-key="layout"></div></div>
-    <div id="colorGroup"><h3>Farben</h3><div class="tiles" data-key="colors"></div></div>
-    <div><h3>Bimmelbahn: Fahrtlänge</h3><div class="tiles" data-key="route"></div></div>
-    <div><h3>Vorlesen und Töne</h3><div class="tiles" data-key="toggles"></div></div>
+    <div id="trainGroup" hidden><h3>Diese Fahrt</h3><div class="tiles" data-key="ride"></div></div>
+    <div><h3>Zählrahmen: Kugeln</h3><div class="tiles" data-key="principle"></div></div>
+    <div><h3>Zählrahmen: Größe</h3><div class="tiles" data-key="range"></div></div>
+    <div><h3>Zählrahmen: Anordnung</h3><div class="tiles" data-key="layout"></div></div>
+    <div id="colorGroup"><h3>Zählrahmen: Farben</h3><div class="tiles" data-key="colors"></div></div>
+    <div><h3>Bimmelbahn: Fahrtlänge je Fahrkarte</h3><div class="tiles" data-key="route"></div></div>
+    <div><h3>Bimmelbahn: Freifahrt</h3><div class="tiles" data-key="free"></div><p class="vnote">Startet eine Fahrt ohne Fahrkarte. Nur über dieses Menü möglich.</p></div>
+    <div><h3>Vorlesen und Töne</h3><div class="tiles" data-key="toggles"></div><p class="vnote" id="voiceNote" hidden>Auf diesem Gerät gibt es keine eingebaute deutsche Stimme. Vorlesen ist deshalb nicht verfügbar – so werden keine Texte an fremde Server geschickt.</p></div>
     <details><summary>So funktioniert es</summary>
-      <p><b>Elternmenü:</b> Der Zahnrad-Knopf öffnet sich erst nach 3 Sekunden Drücken. Hier lässt sich auch die Fahrtlänge der Bimmelbahn einstellen; Standard ist 1 Bahnhof pro Fahrkarte, ohne Aufgaben, „Freie Fahrt“ hat kein Ende.</p>
+      <p><b>Elternmenü:</b> Der Zahnrad-Knopf öffnet sich erst nach 3 Sekunden Drücken, beim Zählrahmen wie in der Bimmelbahn. Hier lässt sich auch die Fahrtlänge der Bimmelbahn einstellen; Standard ist 1 Bahnhof pro Fahrkarte, ohne Aufgaben, „Freie Fahrt“ hat kein Ende.</p>
+      <p><b>Bimmelbahn:</b> Ein ruhiges Zugspiel. Gesteuert wird mit großen Knöpfen: Los, Halt, langsam, schnell und der Hupe. Der Knopf, der gerade gebraucht wird, leuchtet. Fehler werden nie bestraft. Mit „Mit Aufgaben“ wird am Hupen-Schild gehupt, beim Stern gehalten und an der Weiche ein Ziel gewählt. Während der Fahrt öffnet das Zahnrad dieses Menü; dort lassen sich die Aufgaben für die laufende Fahrt umschalten. Am Ende einer Fahrt gibt es kein „Nochmal fahren“, damit das Rechnen nicht umgangen wird. Eine Fahrt ohne Fahrkarte startet nur über die Kachel „Freifahrt starten“ in diesem Menü.</p>
       <p><b>Fahrkarten:</b> Für jeweils 10 richtig gelöste Bilder gibt es eine Fahrkarte für Kommas Bimmelbahn. Sie kann sofort eingelöst oder gesammelt werden. Eine Fahrt kostet eine Fahrkarte. Sterne und Fahrkarten bleiben lokal im Browser gespeichert.</p>
-      <p>Das Kind tippt die Kugel an, bis zu der es zählt. Wischen geht auch. Die App prüft von selbst und gibt keine Fehlermeldungen. Vorlesen ist ab Werk aus: Es lässt sich hier unter „Vorlesen und Töne“ dauerhaft einschalten, oder das Kind tippt bei einer Aufgabe auf den Lautsprecher-Knopf, dann wird nur dieser Satz vorgelesen. Im Zwanzigerraum beginnen die Aufgaben bis 10 und wachsen nach einigen gelösten Bildern bis 20.</p>
+      <p>Das Kind tippt die Kugel an, bis zu der es zählt. Wischen geht auch. Die App prüft von selbst und gibt keine Fehlermeldungen. Vorlesen ist ab Werk aus: Es lässt sich hier unter „Vorlesen und Töne“ dauerhaft einschalten (für Zählrahmen und Bimmelbahn), oder das Kind tippt bei einer Aufgabe auf den Lautsprecher-Knopf, dann wird nur dieser Satz vorgelesen. Es werden nur fest eingebaute Stimmen des Geräts genutzt; fehlt eine deutsche Stimme, sind Knopf und Kachel ausgeblendet. Im Zwanzigerraum beginnen die Aufgaben bis 10 und wachsen nach einigen gelösten Bildern bis 20.</p>
       <p><b>Drehen</b> (Prinzip Abaco): Die Kugeln drehen sich auf der Stange. Was da ist, wird blau; was dazukommt oder weggeht, wird rot (zweifarbig: zurück auf grau).</p>
       <p><b>Schieben</b> (klassischer Abakus): Feste rot-weiße Fünferfarben. Gezählte Kugeln werden nach links geschoben, Weggehende zurück nach rechts. Bei „Dazu“ bleibt eine kleine Lücke zwischen den ersten und den neuen Kugeln.</p></details>
     <details><summary>Lizenz, Datenschutz, Impressum</summary>
       <p>Kommas Zählrahmen von Sebastian Wolf, Lizenz CC BY-SA 4.0.</p>
-      <p>Keine personenbezogenen Daten, keine Cookies, keine externen Schriften oder Dienste. Nur Einstellungen, Sterne und Fahrkarten werden lokal im Browser gespeichert. „Vorlesen“ nutzt die Sprachausgabe des Geräts bzw. Browsers; je nach Browser kann der Text dabei an den Anbieter der Stimme übertragen werden.</p>
+      <p>Keine personenbezogenen Daten, keine Cookies, keine externen Schriften oder Dienste. Nur Einstellungen, Sterne und Fahrkarten werden lokal im Browser gespeichert. „Vorlesen“ nutzt ausschließlich Stimmen, die fest auf dem Gerät installiert sind; dabei werden keine Texte oder Daten übertragen. Gibt es keine solche Stimme, ist Vorlesen ausgeblendet.</p>
       <p>Sebastian Wolf, Graf-Leopold-Ring 2, 94099 Ruhstorf a.d.Rott<br>E-Mail: s.w.oer@outlook.de</p></details>
   </div>
 </div>
@@ -463,7 +454,15 @@ const clack=()=>{tone(300+Math.random()*60,0,.05,'square',.04);tone(900,0,.03,'t
 const ding=()=>{tone(784,0,.3,'sine',.1);tone(1046,.1,.4,'sine',.1)};
 const fanfare=()=>[523,659,784,1046,1318].forEach((f,i)=>tone(f,i*.09,.45,'sine',.1));
 let spoken='';
-function speak(t,force){if(!S.voice&&!force)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='de-DE';u.rate=.9;u.pitch=1.1;speechSynthesis.speak(u);}catch(e){}}
+/* Vorlesen nur mit Stimmen, die fest auf dem Gerät installiert sind (localService) – es verlassen keine Daten das Gerät. */
+let VOICE;
+function findVoice(){let v=null;try{v=speechSynthesis.getVoices().filter(x=>x.localService&&/^de/i.test(x.lang)).sort((a,b)=>(b.lang==='de-DE')-(a.lang==='de-DE'))[0]||null;}catch(e){}
+  if(v!==VOICE){VOICE=v;voiceUI();}}
+function voiceUI(){const b=document.getElementById('speakBtn');if(b)b.hidden=!VOICE;if(typeof buildTiles==='function'&&!document.getElementById('grown').hidden)buildTiles();if(typeof BB!=='undefined'&&BB)BB.sync();}
+try{speechSynthesis.addEventListener('voiceschanged',findVoice);}catch(e){}
+function stopSpeak(){try{speechSynthesis.cancel()}catch(e){}}
+function speakWith(t,rate,pitch){if(!VOICE)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.voice=VOICE;u.lang=VOICE.lang;u.rate=rate;u.pitch=pitch;speechSynthesis.speak(u);}catch(e){}}
+function speak(t,force){if(!S.voice&&!force)return;speakWith(t,.9,1.1);}
 function say(t){$('#bubble').textContent=t;spoken=t;speak(t);}
 function hop(happy){const c=playCat();if(!c)return;if(happy){c.classList.add('happy');setTimeout(()=>c.classList.remove('happy'),1500);}
   if(reduce)return;c.classList.remove('hop');void c.getBoundingClientRect();c.classList.add('hop');}
@@ -757,10 +756,11 @@ $('#tix').addEventListener('click',()=>{if(P.tickets>0)openTrain();else speak(`N
 $('#wallet').addEventListener('click',()=>{if(P.tickets>0){tock();openTrain();}else{const w=$('#wallet');w.classList.remove('no');void w.offsetWidth;w.classList.add('no');speak(`Sammle zehn Sterne beim Rechnen. Dann bekommst du eine Fahrkarte. Noch ${10-P.stars} Sterne.`);}});
 
 /* ---------- Kommas Bimmelbahn ---------- */
-let BB=null;const host=$('#bbHost');
+let BB=null,freeRide=false;const host=$('#bbHost');
 const BBAPI={hidden:()=>host.hidden,tickets:()=>P.tickets,
-  useTicket(){if(P.tickets<1)return false;P.tickets--;saveP();drawTix();return true;},
-  exit:closeTrain,voice:()=>S.voice,setVoice:v=>{S.voice=v;save();},route:()=>S.route,setRoute:r=>{S.route=r;save();}};
+  freeRide:()=>freeRide,
+  useTicket(){if(freeRide){freeRide=false;return true;}if(P.tickets<1)return false;P.tickets--;saveP();drawTix();return true;},
+  exit:closeTrain,voiceOn:()=>S.voice&&!!VOICE,speak:t=>speakWith(t,.95,1.25),stopSpeak,sound:()=>S.sound,setSound:v=>{S.sound=v;save();},openMenu:()=>openGrown(true),route:()=>S.route,setRoute:r=>{S.route=r;save();}};
 function openTrain(){
   try{speechSynthesis.cancel()}catch(e){}clearTimeout(idleT);
   if(!BB){const root=host.attachShadow({mode:'open'});root.appendChild($('#bbTpl').content.cloneNode(true));BB=window.bootBimmel(root,BBAPI);}
@@ -768,6 +768,7 @@ function openTrain(){
   BB.toStart();requestAnimationFrame(()=>BB.resize());
 }
 function closeTrain(){
+  freeRide=false;
   try{if(document.fullscreenElement)document.exitFullscreen();}catch(e){}
   try{speechSynthesis.cancel()}catch(e){}
   host.hidden=true;document.body.style.overflow='';document.querySelector('.wrap').hidden=false;
@@ -830,16 +831,25 @@ function speakerArt(on){return W96(`<path d="M30 22v16h9l12 10V12L39 22z" fill="
 function noteArt(on){return W96(`<path d="M40 40V14l22-5v26" fill="none" stroke="#3e342c" stroke-width="2.4" stroke-linejoin="round"/><ellipse cx="35" cy="41" rx="6" ry="4.6" fill="#f2c650" stroke="#3e342c" stroke-width="2"/><ellipse cx="57" cy="36" rx="6" ry="4.6" fill="#f2c650" stroke="#3e342c" stroke-width="2"/>${on?'':'<path d="M24 50L72 8" stroke="#cc5548" stroke-width="2.8" stroke-linecap="round"/>'}`)}
 function buildTiles(){
   Object.keys(TILES).forEach(k=>{$(`.tiles[data-key="${k}"]`).innerHTML=TILES[k].map(t=>`<button class="tile" data-v="${t[0]}" aria-pressed="${String(S[k])===t[0]}">${t[2]}<span>${t[1]}</span></button>`).join('');});
+  $('#voiceNote').hidden=!!VOICE;
+  const rideOn=menuFromTrain&&BB;$('#trainGroup').hidden=!rideOn;
+  if(rideOn){const tk=BB.tasks();$('.tiles[data-key="ride"]').innerHTML=
+    `<button class="tile" data-ride="ohne" aria-pressed="${!tk}">${W96('<path d="M4 50h88" stroke="#7a6c5f" stroke-width="2.4"/><g transform="translate(14 8) scale(.75)"><rect x="10" y="26" width="40" height="20" rx="4" fill="#cc5548" stroke="#3e342c" stroke-width="2"/><rect x="44" y="12" width="26" height="34" rx="4" fill="#cc5548" stroke="#3e342c" stroke-width="2"/><circle cx="22" cy="49" r="5" fill="#3e342c"/><circle cx="40" cy="49" r="5" fill="#3e342c"/><circle cx="60" cy="48" r="6" fill="#3e342c"/></g>')}<span>Ohne Aufgaben</span></button>`+
+    `<button class="tile" data-ride="mit" aria-pressed="${tk}">${W96('<path d="M48 8 L54 22 L69 23 L58 33 L61 48 L48 40 L35 48 L38 33 L27 23 L42 22Z" fill="#f3c94f" stroke="#3e342c" stroke-width="2" stroke-linejoin="round"/>')}<span>Mit Aufgaben</span></button>`;}
+  $('.tiles[data-key="free"]').innerHTML=`<button class="tile" data-free="1">${W96('<path d="M4 50h88" stroke="#7a6c5f" stroke-width="2.4"/><g transform="translate(76 4) scale(-.8 .8)"><rect x="10" y="26" width="40" height="20" rx="4" fill="#cc5548" stroke="#3e342c" stroke-width="2"/><rect x="44" y="12" width="26" height="34" rx="4" fill="#cc5548" stroke="#3e342c" stroke-width="2"/><rect x="49" y="17" width="16" height="11" rx="2" fill="#dcebf3" stroke="#3e342c" stroke-width="1.5"/><circle cx="22" cy="49" r="5" fill="#3e342c"/><circle cx="40" cy="49" r="5" fill="#3e342c"/><circle cx="60" cy="48" r="6" fill="#3e342c"/></g><g transform="translate(70 8) rotate(12)"><rect x="-13" y="-8" width="26" height="16" rx="2" fill="#9fcf8a" stroke="#3e342c" stroke-width="1.8"/><text x="0" y="5" text-anchor="middle" font-family="Segoe Print,Bradley Hand,Chalkboard SE,Comic Sans MS,cursive" font-size="11" font-weight="700" fill="#3e342c">frei</text></g>')}<span>Freifahrt starten</span></button>`;
   $('.tiles[data-key="toggles"]').innerHTML=
-    `<button class="tile" data-t="voice" aria-pressed="${S.voice}">${speakerArt(S.voice)}<span>Vorlesen ${S.voice?'an':'aus'}</span></button>`+
+    (VOICE?`<button class="tile" data-t="voice" aria-pressed="${S.voice}">${speakerArt(S.voice)}<span>Vorlesen ${S.voice?'an':'aus'}</span></button>`:'')+
     `<button class="tile" data-t="sound" aria-pressed="${S.sound}">${noteArt(S.sound)}<span>Töne ${S.sound?'an':'aus'}</span></button>`;
   $('#colorGroup').hidden=slideMode();
 }
 document.querySelectorAll('.tiles').forEach(box=>box.addEventListener('click',e=>{const b=e.target.closest('.tile');if(!b)return;
-  if(b.dataset.t){S[b.dataset.t]=!S[b.dataset.t];}
+  if(b.dataset.free){tock();closeG();freeRide=true;if(BB&&!host.hidden)BB.toStart();else openTrain();return;}
+  if(b.dataset.ride){tock();BB.setTasks(b.dataset.ride==='mit');buildTiles();return;}
+  if(b.dataset.t){S[b.dataset.t]=!S[b.dataset.t];if(b.dataset.t==='voice'&&!S.voice)stopSpeak();}
   else{const k=box.dataset.key;S[k]=(k==='range'||k==='colors'||k==='route')?+b.dataset.v:b.dataset.v;}
-  save();buildTiles();doorArt();tock();}));
-function openGrown(){buildTiles();$('#grown').hidden=false;$('#grownClose').focus();}
+  save();buildTiles();doorArt();tock();if(BB&&menuFromTrain)BB.sync();}));
+let menuFromTrain=false;
+function openGrown(fromTrain){menuFromTrain=!!fromTrain;buildTiles();$('#grown').hidden=false;$('#grownClose').focus();}
 (function(){const b=$('#grownBtn'),cap=$('#grownCap');let t=null;
   const stop=()=>{if(t){clearTimeout(t);t=null;b.classList.remove('holding');cap.textContent='Erwachsene · 3 Sek. halten';}};
   b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}b.classList.add('holding');cap.textContent='weiter halten …';
@@ -847,12 +857,12 @@ function openGrown(){buildTiles();$('#grown').hidden=false;$('#grownClose').focu
   ['pointerup','pointerleave','pointercancel'].forEach(n=>b.addEventListener(n,stop));
   b.addEventListener('contextmenu',e=>e.preventDefault());
   b.addEventListener('click',e=>{if(e.detail===0)openGrown();});})();
-const closeG=()=>{$('#grown').hidden=true;};
+const closeG=()=>{if($('#grown').hidden)return;$('#grown').hidden=true;if(menuFromTrain&&BB){BB.sync();BB.closeParent();}menuFromTrain=false;};
 $('#grownClose').addEventListener('click',closeG);
 $('#grown').addEventListener('click',e=>{if(e.target.id==='grown')closeG();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeG();});
 
-doorArt();drawJar();$('#trainArt').innerHTML=trainArt();renderWallet();
+doorArt();drawJar();$('#trainArt').innerHTML=trainArt();renderWallet();findVoice();setTimeout(findVoice,700);setTimeout(findVoice,2500);
 })();
 </script>
 <script>
@@ -1241,7 +1251,7 @@ let bubT=null,lastSay='';
 function say(txt,dur=4.5){
   $('bubTxt').textContent=txt;$('bubble').classList.remove('hidden');
   clearTimeout(bubT);bubT=setTimeout(()=>$('bubble').classList.add('hidden'),dur*1000);
-  if(st.speak&&'speechSynthesis' in window){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt.replace(/[^\p{L}\p{N}\s.,!?–-]/gu,''));u.lang='de-DE';u.rate=.95;u.pitch=1.25;const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('de'));if(v)u.voice=v;speechSynthesis.speak(u);}catch(e){}}
+  if(st.speak)API.speak(txt.replace(/[^\p{L}\p{N}\s.,!?–-]/gu,''));
   lastSay=txt;
 }
 const KOMMA_SVG=`<svg viewBox="0 0 100 100"><g stroke="#4a3628" stroke-width="3" stroke-linejoin="round"><path d="M16 46 L20 8 L44 26Z" fill="#d9a66b"/><path d="M84 46 L80 8 L56 26Z" fill="#d9a66b"/><path d="M23 36 L24 17 L37 27Z" fill="#f2b8b0" stroke="none"/><path d="M77 36 L76 17 L63 27Z" fill="#f2b8b0" stroke="none"/><ellipse cx="50" cy="56" rx="36" ry="32" fill="#d9a66b"/></g><path d="M44 26v8M50 25v9M56 26v8" stroke="#b9834a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="50" cy="69" rx="15" ry="10" fill="#fbecd6"/><ellipse cx="37" cy="55" rx="4.5" ry="6.5" fill="#3a2a22"/><ellipse cx="63" cy="55" rx="4.5" ry="6.5" fill="#3a2a22"/><circle cx="38.5" cy="52.5" r="1.8" fill="#fff"/><circle cx="64.5" cy="52.5" r="1.8" fill="#fff"/><path d="M46 64h8l-4 4.5z" fill="#e88f8f"/><path d="M43 71q3.5 4 7 0q3.5 4 7 0" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round"/><g stroke="#4a3628" stroke-width="1.6" opacity=".6" stroke-linecap="round"><path d="M30 66l-14-3M30 70l-14 2M70 66l14-3M70 70l14 2"/></g><circle cx="27" cy="66" r="4" fill="#f08a8a" opacity=".35"/><circle cx="73" cy="66" r="4" fill="#f08a8a" opacity=".35"/><path d="M29 31Q50 2 71 31Z" fill="#3d6ea8" stroke="#4a3628" stroke-width="3" stroke-linejoin="round"/><path d="M39 26Q42 14 50 11M50 31V11M61 26Q58 14 50 11" stroke="#dfe9f5" stroke-width="2.2" fill="none"/><ellipse cx="54" cy="31" rx="24" ry="5" fill="#2b4f7c" stroke="#4a3628" stroke-width="2.5"/><circle cx="50" cy="20" r="3.5" fill="#f3c969" stroke="#4a3628" stroke-width="1.5"/></svg>`;
@@ -1289,17 +1299,14 @@ function honk(){
 function puff(big){if(!TR().smoke)return;const g=trainGeo();for(let i=0;i<(big?7:1);i++)parts.push({k:'smoke',x:g.lx+176*TS+(rnd()-.5)*6,y:g.top+14*TS,vx:-st.v*.8+(rnd()-.5)*30,vy:-50-rnd()*40,r:6+rnd()*5,grow:big?26:16,life:1.6+rnd()*.8,t:0});}
 
 /* Elternmenü (Halten-Sperre) */
-function openParent(){st.paused=true;$('parent').classList.remove('hidden');syncParent();}
-function closeParent(){st.paused=false;$('parent').classList.add('hidden');}
-function syncParent(){ROOT.querySelectorAll('#segRoute button').forEach(b=>b.classList.toggle('sel',+b.dataset.r===st.route));for(const [id,k] of [['pTasks','tasks'],['pSpeak','speak'],['pSound','sound']]){const b=$(id);b.classList.toggle('on',st[k]);b.textContent=st[k]?'an':'aus';}$('tSound').setAttribute('aria-pressed',st.sound);}
-ROOT.querySelectorAll('#segRoute button').forEach(b=>b.onclick=()=>{applyRoute(+b.dataset.r);API.setRoute(+b.dataset.r);syncParent();});
-$('pTasks').onclick=()=>{st.tasks=!st.tasks;if(!st.tasks&&st.forced){st.forced=false;st.level=1;updPips();}syncParent();};
-$('pSpeak').onclick=()=>{st.speak=!st.speak;API.setVoice(st.speak);if(!st.speak&&'speechSynthesis' in window)speechSynthesis.cancel();syncParent();};
+function openParent(){st.paused=true;API.openMenu();}
+function closeParent(){st.paused=false;}
+const ICON_SPK=`<svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>`,ICON_MUTE=`<svg viewBox="0 0 24 24" fill="none" stroke="#4a3628" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M16 9l5 6M21 9l-5 6"/></svg>`;
+function syncParent(){const b=$('tSound');b.setAttribute('aria-pressed',st.sound);b.innerHTML=st.sound?ICON_SPK:ICON_MUTE;}
 function setSound(on){aud();st.sound=on;if(MG)MG.gain.value=on?.8:0;syncParent();}
-$('pSound').onclick=()=>setSound(!st.sound);
-$('tSound').onclick=()=>setSound(!st.sound);
-$('pClose').onclick=closeParent;
-$('pRestart').onclick=()=>{closeParent();$('endScr').classList.add('hidden');resetWorld();if(st.started)setTimeout(()=>say('Neue Fahrt! Drück auf Los.',3.5),300);};
+$('tSound').onclick=()=>{setSound(!st.sound);API.setSound(st.sound);};
+function restartRide(){$('endScr').classList.add('hidden');resetWorld();applyRoute(API.route());if(st.started)setTimeout(()=>say('Neue Fahrt! Drück auf Los.',3.5),300);}
+function setTasks(on){st.tasks=on;if(!st.tasks&&st.forced){st.forced=false;st.level=1;updPips();}}
 function holdToOpen(btn,quiet){let holdT=null;
   btn.addEventListener('pointerdown',e=>{e.preventDefault();try{btn.setPointerCapture(e.pointerId)}catch(_){}btn.classList.add('holding');holdT=setTimeout(()=>{holdT=null;btn.classList.remove('holding');openParent();},3000);});
   const cancelHold=()=>{if(holdT){clearTimeout(holdT);holdT=null;btn.classList.remove('holding');if(!quiet&&st.started)say('Das ist für Erwachsene: Zahnrad 3 Sekunden drücken.',2.5);}};
@@ -1315,7 +1322,6 @@ function drawThumbs(){ROOT.querySelectorAll('.tp').forEach(b=>{const T=TRAINS[b.
   const kx=4+188*s+T.kom[0]*s,ky=oy+T.kom[1]*s;g.fillStyle='#d9a66b';g.beginPath();g.arc(kx,ky,9,0,7);g.fill();g.stroke();g.fillStyle='#3d6ea8';g.beginPath();g.arc(kx,ky-6,7,Math.PI,0);g.fill();g.fillStyle=INK;g.beginPath();g.arc(kx-3,ky,1.3,0,7);g.arc(kx+3,ky,1.3,0,7);g.fill();
 });}
 ROOT.querySelectorAll('.tp').forEach(b=>b.addEventListener('click',()=>{aud();st.train=b.dataset.t;ROOT.querySelectorAll('.tp').forEach(x=>x.classList.toggle('sel',x===b));play(TRAINS[st.train].horn);}));
-$('endAgain').onclick=()=>{$('endScr').classList.add('hidden');resetWorld();begin(st.tasks);};
 $('endOther').onclick=()=>{$('endScr').classList.add('hidden');resetWorld();st.started=false;$('start').classList.remove('hidden');};
 function begin(tasks){
   aud();if(!API.useTicket()){refreshTix();return;}refreshTix();st.tasks=tasks;$('start').classList.add('hidden');st.started=true;
@@ -1323,8 +1329,8 @@ function begin(tasks){
   setTimeout(()=>{play('meow');say('Hallo, ich bin Komma! Drück auf Los – dann fahren wir!',5);},400);
 }
 function refreshTix(){const n=API.tickets();$('tkNum').textContent=n;
-  $('ticketLine').textContent=n>0?`🎫 Du hast ${n} ${n===1?'Fahrkarte':'Fahrkarten'}. Eine Fahrt kostet eine Fahrkarte.`:'Keine Fahrkarte mehr. Sammle am Zählrahmen 10 Sterne!';
-  $('startTasks').disabled=n<1;$('startFree').disabled=n<1;$('endAgain').hidden=n<1;}
+  $('ticketLine').innerHTML=`<span style="width:48px;flex:none;display:inline-flex"><svg viewBox=\"0 0 72 36\"><path d=\"M3 4h66v9a5 5 0 0 0 0 10v9H3v-9a5 5 0 0 0 0-10z\" fill=\"#f6d36a\" stroke=\"#4a3628\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><path d=\"M50 6v24\" stroke=\"#4a3628\" stroke-width=\"1.8\" stroke-dasharray=\"3 3\"/><path d=\"M38 22h-26v-6l4-4h8v6h14z\" fill=\"#cc5548\" stroke=\"#4a3628\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><circle cx=\"18\" cy=\"25\" r=\"3\" fill=\"#4a3628\"/><circle cx=\"32\" cy=\"25\" r=\"3\" fill=\"#4a3628\"/></svg></span><span>${API.freeRide()?'Freifahrt! Diese Fahrt kostet keine Fahrkarte.':n>0?`Du hast ${n} ${n===1?'Fahrkarte':'Fahrkarten'}. Eine Fahrt kostet eine Fahrkarte.`:'Keine Fahrkarte mehr. Sammle beim Zählrahmen 10 Sterne!'}</span>`;
+  const fr=API.freeRide();$('startTasks').disabled=!fr&&n<1;$('startFree').disabled=!fr&&n<1;}
 $('tHome').onclick=()=>API.exit();$('startHome').onclick=()=>API.exit();$('endHome').onclick=()=>API.exit();
 $('startTasks').onclick=()=>begin(true);$('startFree').onclick=()=>begin(false);
 
@@ -1743,6 +1749,6 @@ farTile('wiese');nearTile('wiese');groundTile('wiese');
 spawn();updPips();updRoute();drawThumbs();
 requestAnimationFrame(loop);
 
-return{resize,refreshTix,toStart(){closeParent();$('endScr').classList.add('hidden');resetWorld();st.started=false;st.finished=false;st.tasks=false;st.speak=API.voice();applyRoute(API.route());$('start').classList.remove('hidden');refreshTix();resize();}};
+return{resize,refreshTix,restartRide,setTasks,closeParent,tasks:()=>st.tasks,started:()=>st.started,sync(){applyRoute(API.route());st.speak=API.voiceOn();setSound(API.sound());if(!st.speak)API.stopSpeak();},toStart(){closeParent();$('endScr').classList.add('hidden');resetWorld();st.started=false;st.finished=false;st.tasks=false;st.speak=API.voiceOn();setSound(API.sound());applyRoute(API.route());$('start').classList.remove('hidden');refreshTix();resize();}};
 }
 </script>

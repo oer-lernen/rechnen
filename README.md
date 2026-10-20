@@ -8,8 +8,16 @@ Alles steckt in einer einzigen HTML-Datei. Es gibt keine externen Schriften, Bib
 
 ## Inhalt
 
-- `index.html`: die komplette Anwendung (Zählrahmen und Bimmelbahn)
+- `kommas-zaehlrahmen.html`: die komplette App (Zählrahmen und Bimmelbahn)
 - `README.md`: diese Datei
+
+## Veröffentlichen auf GitHub Pages
+
+1. `kommas-zaehlrahmen.html` ins Repository legen. Soll die App direkt unter der Adresse des Repositorys starten, die Datei in `index.html` umbenennen.
+2. Im Repository unter *Settings → Pages* den Branch auswählen und speichern.
+3. Nach ein bis zwei Minuten ist die App erreichbar.
+
+Die App funktioniert auch offline, wenn man die Datei einfach im Browser öffnet.
 
 ---
 
@@ -44,6 +52,7 @@ Darunter liegt die Karte **Kommas Bimmelbahn** mit den gesammelten Fahrkarten.
   - **Einsteigen:** sofort mit der Bimmelbahn fahren.
   - **Sammeln:** die Fahrkarte in die Mappe auf der Startseite legen.
 - Eine Fahrt kostet eine Fahrkarte. Abgebucht wird erst beim Losfahren.
+- Am Ende einer Fahrt gibt es kein „Nochmal fahren“. So lässt sich das Rechnen nicht umgehen: Weitere Fahrten gibt es nur mit einer neuen Fahrkarte oder als Freifahrt über das Elternmenü.
 - Mit dem 🏠-Knopf geht es jederzeit zurück zum Zählrahmen.
 
 ### Vorlesen
@@ -51,12 +60,17 @@ Darunter liegt die Karte **Kommas Bimmelbahn** mit den gesammelten Fahrkarten.
 - Vorlesen ist ab Werk **aus**.
 - Bei jeder Aufgabe gibt es einen **Lautsprecher-Knopf**. Er liest den aktuellen Satz einmal vor, auch wenn Vorlesen im Elternmenü aus ist.
 - Dauerhaft einschalten lässt sich Vorlesen im Elternmenü. Die Einstellung gilt dann auch für die Bimmelbahn.
+- Es werden **nur Stimmen genutzt, die fest auf dem Gerät installiert sind**. Gibt es keine eingebaute deutsche Stimme (z. B. in Chrome am PC ohne Windows-Sprachpaket), sind Lautsprecher-Knopf und Vorlese-Kachel ausgeblendet. Online-Stimmen wie „Google Deutsch“ oder die „Online (Natural)“-Stimmen von Edge werden nie verwendet.
 
 ---
 
 ## Für Erwachsene: Elternmenü
 
-Das Elternmenü öffnet sich erst, wenn man den Zahnrad-Knopf **5 Sekunden gedrückt hält**. Beim Halten füllt sich der Knopf langsam. Das gilt auf der Startseite, in der Bahn (⚙️) und auf dem Startbildschirm der Bahn.
+Das Elternmenü öffnet sich erst, wenn man den Zahnrad-Knopf **3 Sekunden gedrückt hält**. Beim Halten füllt sich der Knopf langsam. Das gilt auf der Startseite, in der Bahn (Zahnrad oben rechts) und auf dem Startbildschirm der Bahn.
+
+Zählrahmen und Bimmelbahn teilen sich **ein gemeinsames Elternmenü**. Wird es während einer Fahrt geöffnet, pausiert der Zug, und oben erscheint zusätzlich die Gruppe **„Diese Fahrt“**: Ohne Aufgaben · Mit Aufgaben.
+
+Die Kachel **„Freifahrt starten“** (Gruppe „Bimmelbahn: Freifahrt“) startet eine Fahrt ohne Fahrkarte. Sie ist der einzige Weg, ohne Fahrkarte zu fahren.
 
 Alle Einstellungen sind Bildkacheln. Die gewählte Kachel hat einen grünen Haken.
 
@@ -66,17 +80,17 @@ Alle Einstellungen sind Bildkacheln. Die gewählte Kachel hat einen grünen Hake
 | Größe | bis 20 · bis 100 | bis 20 |
 | Anordnung | parallel · in Reihe | parallel |
 | Farben (nur bei „Drehen“) | 3 Farben (grau/blau/rot) · 2 Farben (grau/blau) | 3 Farben |
-| Bimmelbahn: Fahrtlänge | 1 · 2 · 5 Bahnhöfe · Freie Fahrt (∞) | 3 Bahnhöfe |
+| Bimmelbahn: Fahrtlänge je Fahrkarte | 1 · 2 · 5 Bahnhöfe · Freie Fahrt (∞) | 1 Bahnhof |
 | Vorlesen | an · aus | aus |
 | Töne | an · aus | an |
 
 ### Die zwei Kugel-Prinzipien
 
-- **Drehen (Abaco-Prinzip):**
+- **Drehen (Abaco):**
   - Die Kugeln drehen sich auf der Stange.
   - Was im Bild da ist, wird blau. Was dazukommt oder weggeht, wird rot.
   - Bei zwei Farben dreht man das Weggehende zurück auf grau.
-- **Schieben (Abakus-Prinzip):**
+- **Schieben (Abakus):**
   - Die Kugeln haben feste rot-weiße Fünferfarben.
   - Gezählte Kugeln werden nach links geschoben, Weggehende zurück nach rechts.
   - Bei „Dazu“ bleibt eine kleine Lücke zwischen den ersten und den neuen Kugeln.
@@ -88,9 +102,9 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
 
 ### Bimmelbahn
 
-- Jede Fahrt startet ab Werk **ohne Aufgaben** über **3 Bahnhöfe**.
+- Jede Fahrt startet ab Werk **ohne Aufgaben** über **1 Bahnhof** pro Fahrkarte.
 - „Mit Aufgaben“ (Hupen, beim Stern halten, Weiche wählen) ist auf dem Startbildschirm der Bahn wählbar.
-- Die Fahrtlänge lässt sich im Elternmenü einstellen: im Zählrahmen oder in der Bahn.
+- Die Fahrtlänge lässt sich im gemeinsamen Elternmenü einstellen.
 
 ---
 
@@ -102,7 +116,42 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
   - Einstellungen (`kommas-zaehlrahmen-v4`)
   - Sterne und Fahrkarten (`kommas-fahrkarten-v1`)
 - Zum Zurücksetzen genügt es, die Websitedaten im Browser zu löschen.
-- „Vorlesen“ nutzt die Sprachausgabe des Geräts bzw. Browsers. Je nach Browser kann der Text dabei an den Anbieter der Stimme übertragen werden. Deshalb ist Vorlesen ab Werk aus.
+- „Vorlesen“ nutzt ausschließlich lokale Stimmen des Geräts (`localService`). Dabei werden keine Texte und keine IP-Adresse an Dritte übertragen. Fehlt eine solche Stimme, ist Vorlesen nicht verfügbar. Zusätzlich ist Vorlesen ab Werk aus.
+
+---
+
+## Technik
+
+- **Eine Datei:** HTML, CSS und JavaScript in einer Datei, ohne Build-Schritt.
+- **Grafik:**
+  - Der Zählrahmen und die Bilder sind SVG mit Filtern für den Aquarell- und Bleistift-Look.
+  - Die Bimmelbahn zeichnet auf einem Canvas.
+- **Schriften:** nur Systemschriften (Handschrift-Stapel: Segoe Print, Bradley Hand, Chalkboard SE, Comic Sans MS).
+- **Töne:** werden mit der Web Audio API erzeugt, es gibt keine Audiodateien.
+- **Bimmelbahn:** läuft in einem abgeschotteten Bereich der Seite (Shadow DOM). So stören sich die Gestaltungen der beiden Spiele nicht. Die Bahn wird erst beim ersten Einsteigen gestartet und pausiert, solange der Zählrahmen offen ist.
+- **Gestaltung:** Beide Spiele nutzen dieselbe Formensprache: runde Knöpfe für Aktionen (Startseite, Ton, Zahnrad), handgezeichnet wirkende Karten mit Bild und Wort für Auswahlen und Aufkleber-Anzeigen für Sterne, Bahnhöfe und Fahrkarten. Pillenförmige Knöpfe gibt es nicht.
+- **Geräte:** Tablet, Smartboard, Smartphone und PC, bedienbar mit Finger und Maus. Die Ansicht passt sich an und baut sich beim Drehen des Geräts neu auf, ohne dass die Aufgabe verloren geht:
+  - **Smartphone hochkant:** Die Kopfleiste bricht um, die Sprechblase steht über dem Bild. Die Bilder zeigen 5 statt 10 Dinge pro Reihe, damit sie größer sind. Ein Zählrahmen „in Reihe“ steht senkrecht neben dem Bild, gezählt wird von oben nach unten.
+  - **Smartphone quer:** Bild und Zählrahmen stehen nebeneinander.
+  - **Tablet und PC:** Bild oben, Zählrahmen darunter.
+  - **Bimmelbahn hochkant:** Die Spielszene wird größer dargestellt, Himmel und Wiese füllen den Rand. Am schönsten ist sie aber quer.
+- **Barrierearmut:** große Tippflächen, Tastaturfokus sichtbar, Animationen werden bei „Bewegung reduzieren“ abgeschaltet.
+
+### Aufbau des Codes (Zählrahmen)
+
+| Abschnitt im Skript | Aufgabe |
+|---|---|
+| `Katze Komma` | Zeichnung und Animationen der Katze |
+| `Ton und Sprache` | Klickgeräusche, Fanfare, Vorlesen |
+| `Bildteile` | Tiere, Eier, Hintergründe der Aufgabenbilder |
+| `Zählrahmen` | Geometrie und Zeichnung für Drehen und Schieben |
+| `Spielzustand` / `Aufgaben` | Ablauf von Zählen, Dazu und Weg |
+| `Tippen, Wischen, Schieben` | Eingabe am Zählrahmen |
+| `Fahrkarten` | Sterne, Fahrkarten, Mappe auf der Startseite |
+| `Kommas Bimmelbahn` | Öffnen und Schließen der Bahn, Schnittstelle (Fahrkarten, Fahrtlänge, Vorlesen) |
+| `Erwachsene: Bildkacheln` | Elternmenü |
+
+Die Bimmelbahn steht im zweiten `<script>`-Block als Funktion `bootBimmel(ROOT, API)`.
 
 ---
 
