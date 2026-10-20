@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Kommas Zählrahmen</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
@@ -92,6 +94,39 @@ button:focus-visible{outline:3px dashed var(--blue);outline-offset:4px;border-ra
 
 .table{background:linear-gradient(#d8b98c,#c9a676);border-radius:14px;padding:12px 10px 14px;box-shadow:inset 0 3px 0 rgba(255,255,255,.25),0 8px 18px -12px rgba(60,40,20,.7)}
 #frame{width:100%;height:auto;display:block;touch-action:none;user-select:none;-webkit-user-select:none;max-height:58vh}
+/* Bühne: Bild und Zählrahmen untereinander, nebeneinander bei senkrechtem Zählrahmen (Hochkant) oder niedrigem Querformat */
+.board{display:flex;flex-direction:column;gap:12px}
+.lefty{display:flex;flex-direction:column;gap:12px;min-width:0}
+.board.side{flex-direction:row;align-items:flex-start;gap:10px}
+.board.side .lefty{flex:1}
+.board.side .table{flex:none;padding:8px 6px}
+.board.side #frame{width:auto;height:min(76vh,760px);max-height:none;margin:0 auto}
+.board.free .table{margin:0 auto}
+.board.wide{flex-direction:row;align-items:flex-start}
+.board.wide .lefty{flex:1}
+.board.wide .table{flex:1.25;min-width:0}
+.board.wide.reihe .table{flex:2}
+.board.wide #frame{max-height:calc(100vh - 110px)}
+.board.wide .scene-card{max-height:calc(100vh - 110px)}
+@media (max-width:600px){
+  .top{flex-wrap:wrap;gap:8px}
+  .talk{order:3;flex-basis:100%}
+  #speakBtn{margin-left:auto}
+  .bubble{font-size:19px;min-height:48px;padding:7px 12px}
+  .table{padding:8px 6px 9px;border-radius:12px}
+  .choice{width:clamp(68px,22vw,96px)}
+  .next{width:64px;height:64px}
+  .badge div{font-size:clamp(56px,18vw,96px)}
+  .doors{gap:12px}
+  .door{padding:8px 6px 10px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .wrap{padding-block:6px 12px}
+  #play{gap:8px}
+  .talk .cat{width:48px}
+  .round{width:46px;height:46px}
+  .bubble{min-height:44px;font-size:19px}
+}
 .bead{cursor:pointer}
 #frame.schieb .bead{transition:transform .3s cubic-bezier(.3,.8,.3,1)}
 .bead .flip{transform-box:fill-box;transform-origin:center}
@@ -185,13 +220,16 @@ details p{margin:8px 0 0;max-width:65ch;line-height:1.5}
       <div class="jar" id="jar" aria-label="Sterne"></div>
       <button class="tix" id="tix" aria-label="Fahrkarten"></button>
     </div>
+    <div class="board" id="board"><div class="lefty">
     <div class="scene-card" id="sceneCard">
       <svg id="scene" viewBox="0 0 560 260" role="img" aria-label="Bild zur Aufgabe"></svg>
       <div class="badge" id="badge" hidden><div id="badgeNum"></div></div>
       <button class="next" id="nextBtn" aria-label="Nächstes Bild" hidden><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3e342c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
     </div>
     <div class="choices" id="choices" hidden></div>
+    </div>
     <div class="table"><svg id="frame" role="group" aria-label="Zählrahmen. Tippe die Kugel an, bis zu der du zählst."></svg></div>
+    </div>
   </section>
 </div>
 
@@ -465,14 +503,15 @@ function background(kind,w,h){
     <g filter="url(#pen)" stroke="#d29a8c" stroke-width="1.4" opacity=".5"><path d="M0 ${h-26} H${w} M0 ${h-16} H${w}"/></g>`}
   return s;
 }
+const narrow=()=>innerWidth<600||(innerHeight<520&&innerWidth>innerHeight*1.3);
 function animals(kind,n,offset){
-  const cw=48,chh=48;let s='';
-  for(let i=0;i<n;i++){const r=Math.floor(i/10),j=i%10;const x=24+j*cw+(j>=5?18:0)+(Math.random()*6-3),y=26+r*chh+(Math.random()*6-3);const mk=MK[kind];
+  const cw=48,chh=48,per=narrow()?5:10;let s='';
+  for(let i=0;i<n;i++){const r=Math.floor(i/per),j=i%per;const x=24+j*cw+(j>=5?18:0)+(Math.random()*6-3),y=26+r*chh+(per===5?Math.floor(r/2)*12:0)+(Math.random()*6-3);const mk=MK[kind];
     s+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="obj" data-i="${offset+i}">${DRAW[kind]}<circle class="mk" cx="${mk[0]}" cy="${mk[1]}" r="7"/></g></g>`;}
-  const c=Math.min(n,10);return{svg:s,w:c*cw+(c>5?18:0),h:Math.ceil(n/10)*chh};
+  const c=Math.min(n,per);return{svg:s,w:c*cw+(c>5?18:0),h:Math.ceil(n/per)*chh+(per===5?Math.floor((Math.ceil(n/per)-1)/2)*12:0)};
 }
 function eggs(n,offset){
-  const cw=106,chh=48,gap=14,per=4,boxes=Math.max(1,Math.ceil(n/10));let s='';
+  const cw=106,chh=48,gap=14,per=narrow()?2:4,boxes=Math.max(1,Math.ceil(n/10));let s='';
   for(let b=0;b<boxes;b++){const x=(b%per)*(cw+gap),y=Math.floor(b/per)*(chh+gap);
     s+=`<rect x="${x}" y="${y}" width="${cw}" height="${chh}" rx="8" fill="#cdb48f" stroke="#4b3f36" stroke-width="1.5"/>`;
     for(let k=0;k<10;k++){const cx=x+15+(k%5)*19,cy=y+15+Math.floor(k/5)*19,i=b*10+k;s+=`<circle cx="${cx}" cy="${cy}" r="8" fill="#b49b75"/>`;
@@ -508,7 +547,9 @@ function doorArt(){
 
 /* ---------- Zählrahmen ---------- */
 let col=[],els=[],G=null,rowLeft=[];
-function geo(){
+const vertical=()=>S.layout==='reihe'&&innerWidth<700&&innerHeight>innerWidth;
+function geo(){const g=geoBase();g.vert=vertical();g.Wb=g.W;g.Hb=g.H;if(g.vert){g.W=g.Hb;g.H=g.Wb;}return g;}
+function geoBase(){
   const big=S.range==20,sl=slideMode();
   let rows,per;if(big){[rows,per]=S.layout==='parallel'?[2,10]:[1,20]}else{[rows,per]=S.layout==='parallel'?[10,10]:[5,20]}
   const R=big?(sl?17:18):(sl?13.5:14.5),pad=28,rowGap=rows===10?12:0;
@@ -519,7 +560,8 @@ function geo(){
   const STp=big?42:34,g5=big?14:11,g10=per===20?16:0;const xs=[];for(let j=0;j<per;j++)xs.push(pad+R+j*STp+Math.floor(j/5)*g5+Math.floor(j/10)*g10);
   return{R,ys,rows,per,xs,W:xs[per-1]+R+pad,H:ys[rows-1]+R+pad,sl:false};
 }
-function beadXY(i){const r=Math.floor(i/G.per),j=i%G.per;
+function beadXY(i){const p=beadXYb(i);return G.vert?[p[1],p[0]]:p;}
+function beadXYb(i){const r=Math.floor(i/G.per),j=i%G.per;
   if(!G.sl)return[G.xs[j],G.ys[r]];
   const left=j<rowLeft[r];let x;
   if(left){x=G.x0+j*G.D;if(mode==='dazu'&&phase>=2&&A%G.per!==0&&r===Math.floor(A/G.per)&&i>=A)x+=G.D*.7;}
@@ -529,11 +571,12 @@ function beadXY(i){const r=Math.floor(i/G.per),j=i%G.per;
 function drawFrame(){
   G=geo();col=new Array(S.range).fill(-1);rowLeft=new Array(G.rows).fill(0);
   let s=`<g filter="url(#wc)"><rect x="5" y="5" width="${G.W-10}" height="${G.H-10}" rx="18" fill="#c99a66" stroke="#7d5838" stroke-width="2.5"/><rect x="16" y="14" width="${G.W-32}" height="${G.H-28}" rx="10" fill="#f1e6d0" stroke="#9c7148" stroke-width="1.5"/></g>`;
-  s+=`<g filter="url(#pen)" stroke="#7a6c5f" stroke-width="2.2" stroke-linecap="round">${G.ys.map(y=>`<line x1="18" y1="${y}" x2="${G.W-18}" y2="${y}"/>`).join('')}</g><g filter="url(#wc)">`;
+  s+=`<g filter="url(#pen)" stroke="#7a6c5f" stroke-width="2.2" stroke-linecap="round">${G.ys.map(y=>G.vert?`<line x1="${y}" y1="18" x2="${y}" y2="${G.H-18}"/>`:`<line x1="18" y1="${y}" x2="${G.W-18}" y2="${y}"/>`).join('')}</g><g filter="url(#wc)">`;
   for(let i=0;i<S.range;i++){const p=beadXY(i);
     s+=`<g class="bead" data-i="${i}" style="transform:translate(${p[0]}px,${p[1]}px)"><circle r="${G.R+3}" fill="transparent"/><g class="flip"><circle class="ball" r="${G.R}" fill="url(#b0)" stroke="rgba(60,50,40,.55)" stroke-width="1.3"/><ellipse cx="${-G.R*.33}" cy="${-G.R*.4}" rx="${G.R*.3}" ry="${G.R*.2}" fill="#fff" opacity=".45"/></g></g>`;}
   s+=`</g><rect width="${G.W}" height="${G.H}" filter="url(#grain)" pointer-events="none"/>`;
   const svg=$('#frame');svg.setAttribute('viewBox',`0 0 ${G.W} ${G.H}`);svg.innerHTML=s;svg.classList.toggle('schieb',G.sl);
+  layoutBoard();
   els=[...svg.querySelectorAll('.bead')];
   if(G.sl){els.forEach((el,i)=>{const r=Math.floor(i/G.per),j=i%G.per;el.querySelector('.ball').setAttribute('fill',`url(#${G.rows===10||G.per===10?classic(r,j):classic(0,j)})`);});}
   else paint(new Array(S.range).fill(0),false);
@@ -584,12 +627,12 @@ function makeTask(){
   return t;
 }
 function drawScene(){
-  const W=560,GA=group(T.kind,T.a,0);let h,inner;
-  if(mode==='dazu'){const GB=group(T.kind,T.b,T.a);const yA=22,yB=yA+GA.h+30;h=Math.max(250,yB+GB.h+26);
+  const nw=narrow(),W=nw?300:560,minH=nw?200:250,GA=group(T.kind,T.a,0);let h,inner;
+  if(mode==='dazu'){const GB=group(T.kind,T.b,T.a);const yA=22,yB=yA+GA.h+30;h=Math.max(minH,yB+GB.h+26);
     const top=(h-(yB+GB.h+22))/2,xA=(W-GA.w)/2,xB=(W-GB.w)/2;
     inner=`<g transform="translate(${xA} ${yA+top})">${GA.svg}</g><g class="slide" id="gB" style="transform:translateX(${W}px)"><g transform="translate(${xB} ${yB+top})"><rect x="-8" y="-6" width="${GB.w+16}" height="${GB.h+12}" rx="14" fill="none" stroke="#4b3f36" stroke-width="1.8" stroke-dasharray="7 6"/>${GB.svg}</g></g>`;}
-  else{h=Math.max(250,GA.h+50);inner=`<g transform="translate(${(W-GA.w)/2} ${(h-GA.h)/2})">${GA.svg}</g>`;}
-  $('#scene').setAttribute('viewBox',`0 0 ${W} ${h}`);
+  else{h=Math.max(minH,GA.h+50);inner=`<g transform="translate(${(W-GA.w)/2} ${(h-GA.h)/2})">${GA.svg}</g>`;}
+  $('#scene').setAttribute('viewBox',`0 0 ${W} ${h}`);$('#scene').dataset.narrow=String(nw);
   $('#scene').innerHTML=`<g filter="url(#pen)">${background(th(T.kind).bg,W,h)}${inner}</g><rect width="${W}" height="${h}" filter="url(#grain)" pointer-events="none"/>`;
 }
 function newTask(){
@@ -731,9 +774,28 @@ function closeTrain(){
   $('#play').hidden=true;$('#home').hidden=false;renderWallet();drawTix();scrollTo(0,0);
 }
 
+/* ---------- Anpassung an Bildschirm ---------- */
+function layoutBoard(){const b=$('#board');if(!G)return;
+  const side=G.vert,wide=!side&&innerHeight<520&&innerWidth>innerHeight*1.3;
+  b.classList.toggle('side',side);b.classList.toggle('wide',wide);b.classList.toggle('free',mode==='frei');b.classList.toggle('reihe',S.layout==='reihe');}
+let lastShape='';
+function shape(){return [narrow(),vertical(),innerHeight<520&&innerWidth>innerHeight*1.3].join();}
+function relayout(){
+  if($('#play').hidden||!G){lastShape=shape();return;}
+  const sh=shape();if(sh===lastShape)return;lastShape=sh;
+  if(mode==='frei'){const keep=col.slice(),keepL=rowLeft.slice();drawFrame();if(G.sl){rowLeft=keepL;place();}else paint(keep.map(c=>Math.max(0,c)),false);return;}
+  drawFrame();
+  if(T){const n=narrow(),drawn=$('#scene').dataset.narrow;if(String(n)!==drawn){drawScene();
+      if(mode==='dazu'&&phase>=2){const g=$('#gB');if(g){g.style.transition='none';g.style.transform='translateX(0px)';}}
+      if(mode==='weg'&&phase>=2)for(let i=T.a-T.k;i<T.a;i++){const o=document.querySelector(`#scene .obj[data-i="${i}"]`);if(o){o.style.transition='none';o.classList.add('gone');}}}
+    render(false);}
+}
+let rT=null;const onResize=()=>{clearTimeout(rT);rT=setTimeout(()=>{relayout();if(!$('#play').hidden)layoutBoard();},150);};
+addEventListener('resize',onResize);addEventListener('orientationchange',onResize);
+
 /* ---------- Bildschirme ---------- */
 function open(m){
-  mode=m;T=null;$('#home').hidden=true;$('#play').hidden=false;phase=1;A=0;B=0;drawFrame();drawJar();
+  mode=m;T=null;$('#home').hidden=true;$('#play').hidden=false;phase=1;A=0;B=0;drawFrame();drawJar();lastShape=shape();
   const free=m==='frei';$('#sceneCard').hidden=free;$('#choices').hidden=true;
   if(free){locked=false;say(G.sl?'Spiel frei! Schieb die Kugeln hin und her.':'Spiel frei! Tippe die Kugeln an.');}
   else{wins=0;newTask();}
@@ -808,7 +870,7 @@ const INK='#4a3628';
 function resize(){
   const r=$('stage').getBoundingClientRect();
   DPR=Math.min(2,window.devicePixelRatio||1);
-  W=Math.round(Math.max(760,Math.min(1500,H*r.width/Math.max(1,r.height))));
+  W=Math.round(Math.max(r.height>r.width?600:760,Math.min(1500,H*r.width/Math.max(1,r.height))));
   SC=Math.min(r.width/W,r.height/H);
   OX=(r.width-W*SC)/2; OY=(r.height-H*SC)/2;
   cv.width=Math.round(r.width*DPR); cv.height=Math.round(r.height*DPR);
@@ -1624,6 +1686,7 @@ function paper(){if(paperPat)return paperPat;const c=document.createElement('can
 
 function render(){
   ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#f4ead4';ctx.fillRect(0,0,cv.width,cv.height);
+  if(OY>1){const thm=THEMES[st.theme];ctx.fillStyle=thm.sky[0];ctx.fillRect(0,0,cv.width,Math.ceil(OY*DPR)+2);ctx.fillStyle=thm.ground;ctx.fillRect(0,Math.floor((OY+H*SC)*DPR)-2,cv.width,cv.height);}
   ctx.setTransform(SC*DPR,0,0,SC*DPR,OX*DPR,OY*DPR);
   ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
   const tr=st.trans;
