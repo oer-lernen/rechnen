@@ -8,16 +8,8 @@ Alles steckt in einer einzigen HTML-Datei. Es gibt keine externen Schriften, Bib
 
 ## Inhalt
 
-- `kommas-zaehlrahmen.html`: die komplette App (Zählrahmen und Bimmelbahn)
+- `index.html`: die komplette Anwendung (Zählrahmen und Bimmelbahn)
 - `README.md`: diese Datei
-
-## Veröffentlichen auf GitHub Pages
-
-1. `kommas-zaehlrahmen.html` ins Repository legen. Soll die App direkt unter der Adresse des Repositorys starten, die Datei in `index.html` umbenennen.
-2. Im Repository unter *Settings → Pages* den Branch auswählen und speichern.
-3. Nach ein bis zwei Minuten ist die App erreichbar.
-
-Die App funktioniert auch offline, wenn man die Datei einfach im Browser öffnet.
 
 ---
 
@@ -80,11 +72,11 @@ Alle Einstellungen sind Bildkacheln. Die gewählte Kachel hat einen grünen Hake
 
 ### Die zwei Kugel-Prinzipien
 
-- **Drehen (Abaco):**
+- **Drehen (Abaco-Prinzip):**
   - Die Kugeln drehen sich auf der Stange.
   - Was im Bild da ist, wird blau. Was dazukommt oder weggeht, wird rot.
   - Bei zwei Farben dreht man das Weggehende zurück auf grau.
-- **Schieben (Abakus):**
+- **Schieben (Abakus-Prinzip):**
   - Die Kugeln haben feste rot-weiße Fünferfarben.
   - Gezählte Kugeln werden nach links geschoben, Weggehende zurück nach rechts.
   - Bei „Dazu“ bleibt eine kleine Lücke zwischen den ersten und den neuen Kugeln.
@@ -111,36 +103,6 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
   - Sterne und Fahrkarten (`kommas-fahrkarten-v1`)
 - Zum Zurücksetzen genügt es, die Websitedaten im Browser zu löschen.
 - „Vorlesen“ nutzt die Sprachausgabe des Geräts bzw. Browsers. Je nach Browser kann der Text dabei an den Anbieter der Stimme übertragen werden. Deshalb ist Vorlesen ab Werk aus.
-
----
-
-## Technik
-
-- **Eine Datei:** HTML, CSS und JavaScript in einer Datei, ohne Build-Schritt.
-- **Grafik:**
-  - Der Zählrahmen und die Bilder sind SVG mit Filtern für den Aquarell- und Bleistift-Look.
-  - Die Bimmelbahn zeichnet auf einem Canvas.
-- **Schriften:** nur Systemschriften (Handschrift-Stapel: Segoe Print, Bradley Hand, Chalkboard SE, Comic Sans MS).
-- **Töne:** werden mit der Web Audio API erzeugt, es gibt keine Audiodateien.
-- **Bimmelbahn:** läuft in einem abgeschotteten Bereich der Seite (Shadow DOM). So stören sich die Gestaltungen der beiden Spiele nicht. Die Bahn wird erst beim ersten Einsteigen gestartet und pausiert, solange der Zählrahmen offen ist.
-- **Geräte:** Tablet, Smartboard, Smartphone und PC, bedienbar mit Finger und Maus. Die Bahn läuft auf dem Handy am besten quer.
-- **Barrierearmut:** große Tippflächen, Tastaturfokus sichtbar, Animationen werden bei „Bewegung reduzieren“ abgeschaltet.
-
-### Aufbau des Codes (Zählrahmen)
-
-| Abschnitt im Skript | Aufgabe |
-|---|---|
-| `Katze Komma` | Zeichnung und Animationen der Katze |
-| `Ton und Sprache` | Klickgeräusche, Fanfare, Vorlesen |
-| `Bildteile` | Tiere, Eier, Hintergründe der Aufgabenbilder |
-| `Zählrahmen` | Geometrie und Zeichnung für Drehen und Schieben |
-| `Spielzustand` / `Aufgaben` | Ablauf von Zählen, Dazu und Weg |
-| `Tippen, Wischen, Schieben` | Eingabe am Zählrahmen |
-| `Fahrkarten` | Sterne, Fahrkarten, Mappe auf der Startseite |
-| `Kommas Bimmelbahn` | Öffnen und Schließen der Bahn, Schnittstelle (Fahrkarten, Fahrtlänge, Vorlesen) |
-| `Erwachsene: Bildkacheln` | Elternmenü |
-
-Die Bimmelbahn steht im zweiten `<script>`-Block als Funktion `bootBimmel(ROOT, API)`.
 
 ---
 
