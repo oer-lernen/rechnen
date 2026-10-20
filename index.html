@@ -44,10 +44,10 @@ button:focus-visible{outline:3px dashed var(--blue);outline-offset:4px;border-ra
 .door:active{transform:scale(.97)}
 .door svg{width:100%;height:auto;max-width:240px}
 .door span{font-size:clamp(24px,4.4vw,32px);font-weight:700}
-.grown{display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--read);font-size:12px;color:var(--pencil);padding:6px}
-.grown span:first-child{position:relative;isolation:isolate;overflow:hidden;width:46px;height:46px;border-radius:50%;background:var(--sheet);display:grid;place-items:center;box-shadow:0 2px 0 rgba(90,70,50,.2)}
+.grown{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--read);font-size:14px;font-weight:700;color:var(--pencil);padding:8px}
+.grown span:first-child{position:relative;isolation:isolate;overflow:hidden;width:64px;height:64px;border-radius:50%;background:var(--sheet);border:2px solid #d6cab8;display:grid;place-items:center;box-shadow:0 3px 0 rgba(90,70,50,.22)}
 .grown span:first-child::after{content:"";position:absolute;inset:0;background:var(--sun);transform:scaleY(0);transform-origin:bottom;z-index:-1}
-.grown.holding span:first-child::after{animation:fill5 5s linear forwards}
+.grown.holding span:first-child::after{animation:fill5 3s linear forwards}
 @keyframes fill5{to{transform:scaleY(1)}}
 .grown{min-width:220px;touch-action:none;user-select:none;-webkit-user-select:none}
 
@@ -208,7 +208,7 @@ details p{margin:8px 0 0;max-width:65ch;line-height:1.5}
     </div>
     <button class="wallet" id="wallet" aria-label="Kommas Bimmelbahn"><svg class="trainart" id="trainArt" viewBox="0 0 240 120" aria-hidden="true"></svg>
       <div class="wtxt"><div class="wtitle">Kommas Bimmelbahn</div><div class="stubs" id="stubs"></div><div class="prog" id="prog" aria-hidden="true"></div><div class="wsub" id="wsub"></div></div></button>
-    <button class="grown" id="grownBtn" aria-label="Für Erwachsene: Einstellungen und Info"><span><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7a6c5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg></span><span id="grownCap">Erwachsene · 5 Sek. halten</span></button>
+    <button class="grown" id="grownBtn" aria-label="Für Erwachsene: Einstellungen und Info"><span><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7a6c5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg></span><span id="grownCap">Erwachsene · 3 Sek. halten</span></button>
   </section>
 
   <!-- Spiel -->
@@ -301,7 +301,7 @@ canvas{display:block;position:absolute;inset:0}
 .tip{font-size:13px;opacity:.7}
 .hudL{display:flex;gap:6px}
 #tParent{position:relative;overflow:hidden;isolation:isolate}
-#tParent.holding::after,#startInfo.holding::after{content:"";position:absolute;inset:0;background:#f3c969;transform-origin:left;animation:fill 5s linear forwards;z-index:-1}
+#tParent.holding::after,#startInfo.holding::after{content:"";position:absolute;inset:0;background:#f3c969;transform-origin:left;animation:fill 3s linear forwards;z-index:-1}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .trainPick{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .tp{background:#fbf3e1;border:3px solid var(--ink);border-radius:16px;padding:4px 8px 6px;font:inherit;font-weight:800;font-size:clamp(13px,3vmin,17px);color:var(--ink);display:flex;flex-direction:column;align-items:center;cursor:pointer;box-shadow:0 4px 0 rgba(74,54,40,.3);opacity:.75;transition:transform .15s}
@@ -322,7 +322,7 @@ canvas{display:block;position:absolute;inset:0}
   <div id="stage">
     <canvas id="c"></canvas>
     <div id="hud">
-      <div class="hudL"><div class="pill" id="starPill" aria-live="polite">⭐ <span id="stars">0</span></div><div class="pill" id="routePill" title="Bahnhöfe">🚉 <span id="route">0/3</span></div></div>
+      <div class="hudL"><div class="pill" id="starPill" aria-live="polite">⭐ <span id="stars">0</span></div><div class="pill" id="routePill" title="Bahnhöfe">🚉 <span id="route">0/1</span></div></div>
       <div class="hudR">
         <div class="pill tkpill" id="tkPill" title="Fahrkarten">🎫 <span id="tkNum">0</span></div><button class="pill" id="tHome" title="Zurück zum Zählrahmen" aria-label="Zurück zum Zählrahmen">🏠</button><button class="pill tog" id="tSound" aria-pressed="true" title="Ton an/aus">🔊</button>
         <button class="pill" id="tParent" title="Elternmenü – lange gedrückt halten">⚙️</button>
@@ -361,20 +361,20 @@ canvas{display:block;position:absolute;inset:0}
   <p class="tkline" id="ticketLine"></p>
   <p class="tip" id="rotTip">Tipp: Handy quer halten – dann ist die Bahn schön groß.</p>
   <button class="big b2" id="startHome">🏠 Zurück zum Zählrahmen</button>
-  <button class="small-link" id="startInfo" style="position:relative;isolation:isolate;overflow:hidden;touch-action:none">Elternmenü – 5 Sek. halten</button>
+  <button class="small-link" id="startInfo" style="position:relative;isolation:isolate;overflow:hidden;touch-action:none;font-size:16px;font-weight:700;opacity:.9;text-decoration:none;border:2.5px solid #4a3628;border-radius:999px;padding:8px 18px;background:#fbf3e1">⚙️ Elternmenü – 3 Sek. halten</button>
 </div>
 
 <div class="overlay hidden" id="parent">
   <div class="card">
     <h2>⚙️ Elternmenü</h2>
     <div class="opt"><b>Streckenlänge</b> – danach kommt die Endstation
-      <div class="seg" id="segRoute"><button data-r="3">3 Bahnhöfe</button><button data-r="5">5 Bahnhöfe</button><button data-r="8">8 Bahnhöfe</button><button data-r="0">Freie Fahrt ∞</button></div></div>
+      <div class="seg" id="segRoute"><button data-r="1">1 Bahnhof</button><button data-r="2">2 Bahnhöfe</button><button data-r="5">5 Bahnhöfe</button><button data-r="0">Freie Fahrt ∞</button></div></div>
     <div class="opt"><b>Aufgaben</b> <button class="sw" id="pTasks"></button><br><span class="tip">Am Hupen-Schild hupen, am Bahnhof beim Stern halten, an der Weiche ein Ziel wählen.</span></div>
     <div class="opt"><b>Vorlesen</b> <button class="sw" id="pSpeak"></button> &nbsp; <b>Ton</b> <button class="sw" id="pSound"></button></div>
     <div class="rowb" style="margin-top:12px"><button class="big b2" id="pRestart">🔁 Neue Fahrt</button><button class="big b1" id="pClose">Weiter spielen</button></div>
     <hr>
     <p>Ein ruhiges Zugspiel für kleine Kinder. Gesteuert wird mit großen Knöpfen: <b>Los</b>, <b>Halt</b>, <b>langsam</b>, <b>schnell</b> und der <b>Hupe</b>. Der Knopf, der gerade gebraucht wird, leuchtet. Fehler werden nie bestraft. Überall gibt es Dinge zum Antippen.</p>
-    <p>Das Elternmenü öffnet sich nur, wenn man das Zahnrad ⚙️ etwa 5 Sekunden gedrückt hält. Auf dem Startbildschirm gilt das auch für den Knopf „Elternmenü“.</p>
+    <p>Das Elternmenü öffnet sich nur, wenn man das Zahnrad ⚙️ etwa 3 Sekunden gedrückt hält. Auf dem Startbildschirm gilt das auch für den Knopf „Elternmenü“.</p>
     <p><b>Datenschutz:</b> Keine Cookies, kein Tracking, keine Anmeldung, keine Inhalte von fremden Servern. Gespeichert werden nur Sterne und Fahrkarten, lokal im Browser. „Vorlesen“ ist standardmäßig aus; es nutzt die Sprachausgabe des Geräts bzw. Browsers – je nach Browser kann dabei der Text an den Anbieter der Stimme übertragen werden.</p>
     <p>Kommas Zählrahmen &amp; Kommas Bimmelbahn von Sebastian Wolf, Lizenz CC BY-SA 4.0.<br>Impressum: Sebastian Wolf, Graf-Leopold-Ring 2, 94099 Ruhstorf a.d.Rott, s.w.oer@outlook.de</p>
   </div>
@@ -404,7 +404,7 @@ canvas{display:block;position:absolute;inset:0}
     <div><h3>Bimmelbahn: Fahrtlänge</h3><div class="tiles" data-key="route"></div></div>
     <div><h3>Vorlesen und Töne</h3><div class="tiles" data-key="toggles"></div></div>
     <details><summary>So funktioniert es</summary>
-      <p><b>Elternmenü:</b> Der Zahnrad-Knopf öffnet sich erst nach 5 Sekunden Drücken. Hier lässt sich auch die Fahrtlänge der Bimmelbahn einstellen; Standard sind 3 Bahnhöfe ohne Aufgaben, „Freie Fahrt“ hat kein Ende.</p>
+      <p><b>Elternmenü:</b> Der Zahnrad-Knopf öffnet sich erst nach 3 Sekunden Drücken. Hier lässt sich auch die Fahrtlänge der Bimmelbahn einstellen; Standard ist 1 Bahnhof pro Fahrkarte, ohne Aufgaben, „Freie Fahrt“ hat kein Ende.</p>
       <p><b>Fahrkarten:</b> Für jeweils 10 richtig gelöste Bilder gibt es eine Fahrkarte für Kommas Bimmelbahn. Sie kann sofort eingelöst oder gesammelt werden. Eine Fahrt kostet eine Fahrkarte. Sterne und Fahrkarten bleiben lokal im Browser gespeichert.</p>
       <p>Das Kind tippt die Kugel an, bis zu der es zählt. Wischen geht auch. Die App prüft von selbst und gibt keine Fehlermeldungen. Vorlesen ist ab Werk aus: Es lässt sich hier unter „Vorlesen und Töne“ dauerhaft einschalten, oder das Kind tippt bei einer Aufgabe auf den Lautsprecher-Knopf, dann wird nur dieser Satz vorgelesen. Im Zwanzigerraum beginnen die Aufgaben bis 10 und wachsen nach einigen gelösten Bildern bis 20.</p>
       <p><b>Drehen</b> (Prinzip Abaco): Die Kugeln drehen sich auf der Stange. Was da ist, wird blau; was dazukommt oder weggeht, wird rot (zweifarbig: zurück auf grau).</p>
@@ -420,8 +420,8 @@ canvas{display:block;position:absolute;inset:0}
 (function(){
 const $=s=>document.querySelector(s);
 const KEY='kommas-zaehlrahmen-v4';
-const S={principle:'dreh',range:20,layout:'parallel',colors:3,voice:false,sound:true,route:3};
-try{const r=localStorage.getItem(KEY);if(r)Object.assign(S,JSON.parse(r));
+const S={principle:'dreh',range:20,layout:'parallel',colors:3,voice:false,sound:true,route:1};
+try{const r=localStorage.getItem(KEY);if(r){Object.assign(S,JSON.parse(r));if(![1,2,5,0].includes(S.route))S.route=1;}
   else{const o=localStorage.getItem('kommas-zaehlrahmen-v3');if(o){const v=JSON.parse(o);delete v.voice;Object.assign(S,v);}}}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -820,7 +820,7 @@ const TILES={
     ['parallel','parallel',W96(`<g transform="translate(2 8)">${miniFrame({w:92,h:44,rows:2,per:10,r:3.4,colorFn:(r,j)=>j<5?'b1':'b0'})}</g>`)],
     ['reihe','in Reihe',W96(`<g transform="translate(1 16)">${miniFrame({w:94,h:28,rows:1,per:20,r:1.9,colorFn:(r,j)=>Math.floor(j/5)%2?'b0':'b1'})}</g>`)]
   ],
-  route:[3,5,8].map(n=>[String(n),`${n} Bahnhöfe`,W96(`<path d="M6 44h84" stroke="#7a6c5f" stroke-width="2.4"/><path d="M8 49h80" stroke="#9c8a74" stroke-width="1.6" stroke-dasharray="4 5"/>${Array.from({length:n},(_,i)=>{const x=12+i*(72/Math.max(1,n-1));const sc=n>5?.7:1;return `<g transform="translate(${x} 42) scale(${sc})"><path d="M-7 0v-10l7-6l7 6v10z" fill="${i===n-1?'#cc5548':'#f3c969'}" stroke="#3e342c" stroke-width="1.4" stroke-linejoin="round"/></g>`}).join('')}<text x="48" y="20" text-anchor="middle" font-family="Segoe Print,Bradley Hand,Chalkboard SE,Comic Sans MS,cursive" font-size="16" font-weight="700" fill="#3e342c">${n}</text>`)]).concat([['0','Freie Fahrt',W96(`<path d="M6 44h84" stroke="#7a6c5f" stroke-width="2.4"/><path d="M8 49h80" stroke="#9c8a74" stroke-width="1.6" stroke-dasharray="4 5"/><text x="48" y="34" text-anchor="middle" font-family="Segoe Print,Bradley Hand,Chalkboard SE,Comic Sans MS,cursive" font-size="34" font-weight="700" fill="#4f7fbf">∞</text>`)]]),
+  route:[1,2,5].map(n=>[String(n),`${n} ${n===1?'Bahnhof':'Bahnhöfe'}`,W96(`<path d="M6 44h84" stroke="#7a6c5f" stroke-width="2.4"/><path d="M8 49h80" stroke="#9c8a74" stroke-width="1.6" stroke-dasharray="4 5"/>${Array.from({length:n},(_,i)=>{const x=n===1?48:12+i*(72/Math.max(1,n-1));const sc=n>5?.7:1;return `<g transform="translate(${x} 42) scale(${sc})"><path d="M-7 0v-10l7-6l7 6v10z" fill="${i===n-1?'#cc5548':'#f3c969'}" stroke="#3e342c" stroke-width="1.4" stroke-linejoin="round"/></g>`}).join('')}<text x="48" y="20" text-anchor="middle" font-family="Segoe Print,Bradley Hand,Chalkboard SE,Comic Sans MS,cursive" font-size="16" font-weight="700" fill="#3e342c">${n}</text>`)]).concat([['0','Freie Fahrt',W96(`<path d="M6 44h84" stroke="#7a6c5f" stroke-width="2.4"/><path d="M8 49h80" stroke="#9c8a74" stroke-width="1.6" stroke-dasharray="4 5"/><text x="48" y="34" text-anchor="middle" font-family="Segoe Print,Bradley Hand,Chalkboard SE,Comic Sans MS,cursive" font-size="34" font-weight="700" fill="#4f7fbf">∞</text>`)]]),
   colors:[
     ['3','3 Farben',W96(`<line x1="8" y1="30" x2="88" y2="30" stroke="#7a6c5f" stroke-width="2"/>${bead(24,30,11,'b0')}${bead(48,30,11,'b1')}${bead(72,30,11,'b2')}`)],
     ['2','2 Farben',W96(`<line x1="8" y1="30" x2="88" y2="30" stroke="#7a6c5f" stroke-width="2"/>${bead(34,30,11,'b0')}${bead(62,30,11,'b1')}`)]
@@ -841,9 +841,9 @@ document.querySelectorAll('.tiles').forEach(box=>box.addEventListener('click',e=
   save();buildTiles();doorArt();tock();}));
 function openGrown(){buildTiles();$('#grown').hidden=false;$('#grownClose').focus();}
 (function(){const b=$('#grownBtn'),cap=$('#grownCap');let t=null;
-  const stop=()=>{if(t){clearTimeout(t);t=null;b.classList.remove('holding');cap.textContent='Erwachsene · 5 Sek. halten';}};
+  const stop=()=>{if(t){clearTimeout(t);t=null;b.classList.remove('holding');cap.textContent='Erwachsene · 3 Sek. halten';}};
   b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}b.classList.add('holding');cap.textContent='weiter halten …';
-    t=setTimeout(()=>{t=null;b.classList.remove('holding');cap.textContent='Erwachsene · 5 Sek. halten';openGrown();},5000);});
+    t=setTimeout(()=>{t=null;b.classList.remove('holding');cap.textContent='Erwachsene · 3 Sek. halten';openGrown();},3000);});
   ['pointerup','pointerleave','pointercancel'].forEach(n=>b.addEventListener(n,stop));
   b.addEventListener('contextmenu',e=>e.preventDefault());
   b.addEventListener('click',e=>{if(e.detail===0)openGrown();});})();
@@ -1127,7 +1127,7 @@ function stationSprite(){return mk('bahnhof',240,180,120,178,g=>{
 });}
 
 /* ================= Zustand ================= */
-const st={train:'dampf',route:3,passed:0,stSpawned:0,riders:0,finished:false,endBrake:false,paused:false,stopT:0,snailCD:0,saidHop:false,started:false,d:0,v:0,level:0,forced:false,T:0,stars:0,tasks:false,speak:false,sound:true,theme:'wiese',trans:null,wheel:0,boarding:null,chug:0,cn:0,blinkT:2,blink:0,kWave:0,kEar:0};
+const st={train:'dampf',route:1,passed:0,stSpawned:0,riders:0,finished:false,endBrake:false,paused:false,stopT:0,snailCD:0,saidHop:false,started:false,d:0,v:0,level:0,forced:false,T:0,stars:0,tasks:false,speak:false,sound:true,theme:'wiese',trans:null,wheel:0,boarding:null,chug:0,cn:0,blinkT:2,blink:0,kWave:0,kEar:0};
 let events=[],decos=[],parts=[],hoppers=[];
 let nextEv=1900,evI=0,nextDeco=-900,pendingSw=null;
 const birds=new Map();let birdScare=0,birdHits=[],fishes=[],dtG=.016;
@@ -1301,8 +1301,8 @@ $('tSound').onclick=()=>setSound(!st.sound);
 $('pClose').onclick=closeParent;
 $('pRestart').onclick=()=>{closeParent();$('endScr').classList.add('hidden');resetWorld();if(st.started)setTimeout(()=>say('Neue Fahrt! Drück auf Los.',3.5),300);};
 function holdToOpen(btn,quiet){let holdT=null;
-  btn.addEventListener('pointerdown',e=>{e.preventDefault();try{btn.setPointerCapture(e.pointerId)}catch(_){}btn.classList.add('holding');holdT=setTimeout(()=>{holdT=null;btn.classList.remove('holding');openParent();},5000);});
-  const cancelHold=()=>{if(holdT){clearTimeout(holdT);holdT=null;btn.classList.remove('holding');if(!quiet&&st.started)say('Das ist für Erwachsene: Zahnrad 5 Sekunden drücken.',2.5);}};
+  btn.addEventListener('pointerdown',e=>{e.preventDefault();try{btn.setPointerCapture(e.pointerId)}catch(_){}btn.classList.add('holding');holdT=setTimeout(()=>{holdT=null;btn.classList.remove('holding');openParent();},3000);});
+  const cancelHold=()=>{if(holdT){clearTimeout(holdT);holdT=null;btn.classList.remove('holding');if(!quiet&&st.started)say('Das ist für Erwachsene: Zahnrad 3 Sekunden drücken.',2.5);}};
   ['pointerup','pointerleave','pointercancel'].forEach(n=>btn.addEventListener(n,cancelHold));
   btn.addEventListener('contextmenu',e=>e.preventDefault());
   btn.addEventListener('click',e=>{if(e.detail===0)openParent();});}
@@ -1366,7 +1366,7 @@ function startBoarding(e,late){
 function finishTrip(){
   st.finished=true;st.level=0;updPips();play('fanfare');confetti();st.kWave=3;
   setTimeout(confetti,900);
-  setTimeout(()=>{const r=st.riders;$('endTxt').textContent=`Du bist ${st.passed} Bahnhöfe weit gefahren und hast ${r} ${r===1?'Tier':'Tiere'} mitgenommen${st.tasks?` – und ${st.stars} Sterne gesammelt`:''}. Toll gemacht!`;$('endScr').classList.remove('hidden');play('meow');},2600);
+  setTimeout(()=>{const r=st.riders;$('endTxt').textContent=`Du bist ${st.passed} ${st.passed===1?'Bahnhof':'Bahnhöfe'} weit gefahren und hast ${r} ${r===1?'Tier':'Tiere'} mitgenommen${st.tasks?` – und ${st.stars} Sterne gesammelt`:''}. Toll gemacht!`;$('endScr').classList.remove('hidden');play('meow');},2600);
 }
 
 /* ================= Update ================= */
