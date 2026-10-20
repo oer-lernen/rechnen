@@ -66,7 +66,7 @@ Alle Einstellungen sind Bildkacheln. Die gewählte Kachel hat einen grünen Hake
 | Größe | bis 20 · bis 100 | bis 20 |
 | Anordnung | parallel · in Reihe | parallel |
 | Farben (nur bei „Drehen“) | 3 Farben (grau/blau/rot) · 2 Farben (grau/blau) | 3 Farben |
-| Bimmelbahn: Fahrtlänge | 3 · 5 · 8 Bahnhöfe · Freie Fahrt (∞) | 3 Bahnhöfe |
+| Bimmelbahn: Fahrtlänge | 1 · 2 · 5 Bahnhöfe · Freie Fahrt (∞) | 3 Bahnhöfe |
 | Vorlesen | an · aus | aus |
 | Töne | an · aus | an |
 
