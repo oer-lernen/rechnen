@@ -1,4 +1,4 @@
-# Kommas Zählrahmen & Kommas Bimmelbahn
+# Kommas Zählrahmen und Kommas Bimmelbahn
 
 Eine ruhige Lern-App für kleine Kinder im Aquarell- und Zeichenstift-Stil. Die Kinder sehen ein Bild, stellen die Menge an einem virtuellen Zählrahmen ein und sammeln dabei Sterne. Für jeweils 10 Sterne gibt es eine Fahrkarte für **Kommas Bimmelbahn**, ein kleines Zugspiel mit Katze Komma als Lokführerin.
 
@@ -8,16 +8,8 @@ Alles steckt in einer einzigen HTML-Datei. Es gibt keine externen Schriften, Bib
 
 ## Inhalt
 
-- `kommas-zaehlrahmen.html`: die komplette App (Zählrahmen und Bimmelbahn)
+- `index.html`: die komplette App (Zählrahmen und Bimmelbahn)
 - `README.md`: diese Datei
-
-## Veröffentlichen auf GitHub Pages
-
-1. `kommas-zaehlrahmen.html` ins Repository legen. Soll die App direkt unter der Adresse des Repositorys starten, die Datei in `index.html` umbenennen.
-2. Im Repository unter *Settings → Pages* den Branch auswählen und speichern.
-3. Nach ein bis zwei Minuten ist die App erreichbar.
-
-Die App funktioniert auch offline, wenn man die Datei einfach im Browser öffnet.
 
 ---
 
@@ -60,10 +52,10 @@ Oben rechts sitzt der **Vollbild-Knopf** (vier Ecken). Er erscheint auch im Spie
 
 ### Vorlesen
 
-- Vorlesen ist ab Werk **aus**.
+- Vorlesen ist standardmäßig **aus**.
 - Bei jeder Aufgabe gibt es einen **Lautsprecher-Knopf**. Er liest den aktuellen Satz einmal vor, auch wenn Vorlesen im Elternmenü aus ist.
 - Dauerhaft einschalten lässt sich Vorlesen im Elternmenü. Die Einstellung gilt dann auch für die Bimmelbahn.
-- Es werden **nur Stimmen genutzt, die fest auf dem Gerät installiert sind**. Gibt es keine eingebaute deutsche Stimme (z. B. in Chrome am PC ohne Windows-Sprachpaket), sind Lautsprecher-Knopf und Vorlese-Kachel ausgeblendet. Online-Stimmen wie „Google Deutsch“ oder die „Online (Natural)“-Stimmen von Edge werden nie verwendet.
+- Es werden **nur Stimmen genutzt, die fest auf dem Gerät installiert sind**. Gibt es keine eingebaute deutsche Stimme (z. B. in Chrome am PC ohne Windows-Sprachpaket), sind Lautsprecher-Knopf und Vorlese-Kachel ausgeblendet.
 
 ---
 
@@ -105,11 +97,11 @@ Die **verliebten Zahlen** gehen unabhängig von der Stufe immer bis 10 (1 + 9 bi
 
 ### Die zwei Kugel-Prinzipien
 
-- **Drehen (Abaco):**
+- **Drehen (Abaco-Prinzip):**
   - Die Kugeln drehen sich auf der Stange.
   - Was im Bild da ist, wird blau. Was dazukommt oder weggeht, wird rot.
   - Bei zwei Farben dreht man das Weggehende zurück auf grau.
-- **Schieben (Abakus):**
+- **Schieben (Abakus-Prinzip):**
   - Die Kugeln haben feste rot-weiße Fünferfarben.
   - Gezählte Kugeln werden nach links geschoben, Weggehende zurück nach rechts.
   - Bei „Dazu“ bleibt eine kleine Lücke zwischen den ersten und den neuen Kugeln.
@@ -121,7 +113,7 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
 
 ### Bimmelbahn
 
-- Jede Fahrt startet ab Werk **ohne Aufgaben** über **1 Bahnhof** pro Fahrkarte.
+- Jede Fahrt startet standardmäßig **ohne Aufgaben** über **1 Bahnhof** pro Fahrkarte.
 - „Mit Aufgaben“ (Hupen, beim Stern halten, Weiche wählen) ist auf dem Startbildschirm der Bahn wählbar.
 - Die Fahrtlänge lässt sich im gemeinsamen Elternmenü einstellen.
 
@@ -136,52 +128,10 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
   - Bei *Nein* wird nichts gespeichert. Die App funktioniert vollständig, vergisst den Stand aber beim Schließen und fragt beim nächsten Start erneut.
   - Widerruf jederzeit im Elternmenü mit *Nicht merken*: Alle gespeicherten Angaben werden sofort gelöscht.
 - Die vollständige **Datenschutzerklärung** (Verantwortlicher, GitHub-Pages-Protokolle, Speicherung auf dem Gerät, Vorlesen, Kinder, externe Links, Rechte, Aufsichtsbehörde BayLDA) steht in der App unter „Datenschutz“, ebenso **Impressum** und **Lizenz**.
-- „Vorlesen“ nutzt ausschließlich lokale Stimmen des Geräts (`localService`). Dabei werden keine Texte und keine IP-Adresse an Dritte übertragen. Fehlt eine solche Stimme, ist Vorlesen nicht verfügbar. Zusätzlich ist Vorlesen ab Werk aus.
-
----
-
-## Technik
-
-- **Eine Datei:** HTML, CSS und JavaScript in einer Datei, ohne Build-Schritt.
-- **Grafik:**
-  - Der Zählrahmen und die Bilder sind SVG mit Filtern für den Aquarell- und Bleistift-Look.
-  - Die Bimmelbahn zeichnet auf einem Canvas.
-- **Schriften:** nur Systemschriften (Handschrift-Stapel: Segoe Print, Bradley Hand, Chalkboard SE, Comic Sans MS).
-- **Töne:** werden mit der Web Audio API erzeugt, es gibt keine Audiodateien.
-- **Bimmelbahn:** läuft in einem abgeschotteten Bereich der Seite (Shadow DOM). So stören sich die Gestaltungen der beiden Spiele nicht. Die Bahn wird erst beim ersten Einsteigen gestartet und pausiert, solange der Zählrahmen offen ist.
-- **Gestaltung:** Beide Spiele nutzen dieselbe Formensprache: runde Knöpfe für Aktionen (Startseite, Ton, Zahnrad), handgezeichnet wirkende Karten mit Bild und Wort für Auswahlen und Aufkleber-Anzeigen für Sterne, Bahnhöfe und Fahrkarten. Pillenförmige Knöpfe gibt es nicht.
-- **Geräte:** Tablet, Smartboard, Smartphone und PC, bedienbar mit Finger und Maus. Die Ansicht passt sich an und baut sich beim Drehen des Geräts neu auf, ohne dass die Aufgabe verloren geht:
-  - **Smartphone hochkant:** Die Kopfleiste bricht um, die Sprechblase steht über dem Bild. Die Bilder zeigen 5 statt 10 Dinge pro Reihe, damit sie größer sind. Ein Zählrahmen „in Reihe“ steht senkrecht neben dem Bild, gezählt wird von oben nach unten.
-  - **Smartphone quer:** Bild und Zählrahmen stehen nebeneinander.
-  - **Tablet und PC:** Bild oben, Zählrahmen darunter.
-  - **Bimmelbahn hochkant:** Die Spielszene wird größer dargestellt, Himmel und Wiese füllen den Rand. Am schönsten ist sie aber quer.
-- **Barrierearmut:** große Tippflächen, Tastaturfokus sichtbar, Animationen werden bei „Bewegung reduzieren“ abgeschaltet.
-
-### Aufbau des Codes (Zählrahmen)
-
-| Abschnitt im Skript | Aufgabe |
-|---|---|
-| `Katze Komma` | Zeichnung und Animationen der Katze |
-| `Ton und Sprache` | Klickgeräusche, Fanfare, Vorlesen |
-| `Bildteile` | Tiere, Eier, Hintergründe der Aufgabenbilder |
-| `Zählrahmen` | Geometrie und Zeichnung für Drehen und Schieben |
-| `Spielzustand` / `Aufgaben` | Ablauf von Zählen, Dazu und Weg |
-| `Tippen, Wischen, Schieben` | Eingabe am Zählrahmen |
-| `Fahrkarten` | Sterne, Fahrkarten, Mappe auf der Startseite |
-| `Kommas Bimmelbahn` | Öffnen und Schließen der Bahn, Schnittstelle (Fahrkarten, Fahrtlänge, Vorlesen) |
-| `Erwachsene: Bildkacheln` | Elternmenü |
-
-Die Bimmelbahn steht im zweiten `<script>`-Block als Funktion `bootBimmel(ROOT, API)`.
+- „Vorlesen“ nutzt ausschließlich lokale Stimmen des Geräts (`localService`). Dabei werden keine Texte und keine IP-Adresse an Dritte übertragen. Fehlt eine solche Stimme, ist Vorlesen nicht verfügbar. Zusätzlich ist Vorlesen ab standardmäßig aus.
 
 ---
 
 ## Lizenz
 
 Kommas Zählrahmen & Kommas Bimmelbahn von Sebastian Wolf, lizenziert unter [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de). Du darfst die App teilen und bearbeiten, wenn du den Namen nennst und unter gleichen Bedingungen weitergibst.
-
-## Impressum
-
-Sebastian Wolf
-Graf-Leopold-Ring 2
-94099 Ruhstorf a.d.Rott
-E-Mail: s.w.oer@outlook.de
