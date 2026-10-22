@@ -29,7 +29,7 @@ Fünf große Bildkarten führen zum Spiel:
 
 Darunter liegt die Karte **Kommas Bimmelbahn** mit den gesammelten Fahrkarten. Ganz unten stehen Links zu Impressum, Datenschutz und Lizenz.
 
-Oben rechts sitzt der **Vollbild-Knopf** (vier Ecken). Er erscheint auch im Spiel und in der Bahn und schaltet Vollbild an und aus. Auf Geräten, die kein Vollbild für Webseiten erlauben (z. B. iPhone), ist er ausgeblendet. Auf dem iPhone geht es stattdessen über „Zum Home-Bildschirm“.
+Oben links führt der **Haus-Knopf** zur Startseite prima.kommakatze.de (offline ausgeblendet). Oben rechts sitzt der **Vollbild-Knopf** (vier Ecken). Er erscheint auch im Spiel und in der Bahn und schaltet Vollbild an und aus. Auf Geräten, die kein Vollbild für Webseiten erlauben (z. B. iPhone), ist er ausgeblendet. Auf dem iPhone geht es stattdessen über „Zum Home-Bildschirm“.
 
 ### Zählrahmen bedienen
 
@@ -61,7 +61,7 @@ Oben rechts sitzt der **Vollbild-Knopf** (vier Ecken). Er erscheint auch im Spie
 
 ## Für Erwachsene: Elternmenü
 
-Das Elternmenü öffnet sich erst, wenn man den Zahnrad-Knopf **3 Sekunden gedrückt hält**. Beim Halten füllt sich der Knopf langsam. Das gilt auf der Startseite, in der Bahn (Zahnrad oben rechts) und auf dem Startbildschirm der Bahn.
+Das Elternmenü öffnet sich erst, wenn man den Zahnrad-Knopf **2 Sekunden gedrückt hält**. Beim Halten füllt sich der Knopf langsam. Das gilt auf der Startseite, in der Bahn (Zahnrad oben rechts) und auf dem Startbildschirm der Bahn.
 
 Zählrahmen und Bimmelbahn teilen sich **ein gemeinsames Elternmenü**. Wird es während einer Fahrt geöffnet, pausiert der Zug, und oben erscheint zusätzlich die Gruppe **„Diese Fahrt“**: Ohne Aufgaben · Mit Aufgaben.
 
@@ -135,3 +135,5 @@ Im Hunderterraum zeigen die Bilder Eier in Zehnerkartons. So wird das Bündeln s
 ## Lizenz
 
 Kommas Zählrahmen & Kommas Bimmelbahn von Sebastian Wolf, lizenziert unter [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de). Du darfst die App teilen und bearbeiten, wenn du den Namen nennst und unter gleichen Bedingungen weitergibst.
+
+**Transparenzhinweis:** Programmiert mit Unterstützung von KI (Claude, Anthropic). Idee, Inhalte und fachliche Prüfung: Sebastian Wolf.
